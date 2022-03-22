@@ -1,5 +1,8 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
+import matter from 'gray-matter'
+import { MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { serialize } from 'next-mdx-remote/serialize'
 import Container from '../../components/container'
 import PostBody from '../../components/post-body'
 import Header from '../../components/header'
@@ -15,10 +18,11 @@ import PostType from '../../types/post'
 type Props = {
   post: PostType
   morePosts: PostType[]
-  preview?: boolean
+  preview?: boolean,
+  source: MDXRemoteSerializeResult
 }
 
-const Post = ({ post, morePosts, preview }: Props) => {
+const Post = ({ post, morePosts, preview, source }: Props) => {
   const router = useRouter()
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
@@ -44,7 +48,7 @@ const Post = ({ post, morePosts, preview }: Props) => {
                 date={post.date}
                 author={post.author}
               />
-              <PostBody content={post.content} />
+              <PostBody content={post.content} source={source} />
             </article>
           </>
         )}
@@ -71,7 +75,13 @@ export async function getStaticProps({ params }: Params) {
     'ogImage',
     'coverImage',
   ])
-  const content = await markdownToHtml(post.content || '')
+  const postContent = await markdownToHtml(post.content || '')
+  const {
+    content,
+    data: { title, description, date },
+  } = matter(postContent);
+
+  const source = await serialize(content)
 
   return {
     props: {
@@ -79,6 +89,7 @@ export async function getStaticProps({ params }: Params) {
         ...post,
         content,
       },
+      source,
     },
   }
 }
