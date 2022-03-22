@@ -1,6 +1,7 @@
+import { FaTwitter, FaInstagram } from 'react-icons/fa'
 import Container from './container'
-import { EXAMPLE_PATH } from '../lib/constants'
 import BrandName from './BrandName'
+import CircleIcon from './CircleIcon'
 
 const Footer = () => {
   return (
@@ -8,7 +9,21 @@ const Footer = () => {
       <Container>
         <div className="py-12 flex flex-col lg:flex-row items-center lg:justify-between">
           <BrandName />
-          <div></div>
+          <div>
+            <CircleIcon
+              href={`https://twitter.com/JosmanProudinat`}
+              title={`Twitter @JosmanProudinat`}
+              marginRight
+            >
+              <FaTwitter />
+            </CircleIcon>
+            <CircleIcon
+              href={`https://instagram.com/JosmanProudinat`}
+              title={`Instagram @JosmanProudinat`}
+            >
+              <FaInstagram />
+            </CircleIcon>
+          </div>
         </div>
       </Container>
     </footer>
