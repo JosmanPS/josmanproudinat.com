@@ -30,7 +30,6 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
   return (
     <Layout preview={preview}>
       <Container>
-        <Header />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
@@ -38,7 +37,7 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
             <article className="mb-32">
               <Head>
                 <title>
-                  {post.title} | Next.js Blog Example with {CMS_NAME}
+                  {post.title} | Josman Proudinat
                 </title>
                 <meta property="og:image" content={post.ogImage.url} />
               </Head>

@@ -34,8 +34,12 @@ const PostPreview = ({
       <div className="text-lg mb-4">
         <DateFormatter dateString={date} />
       </div>
-      <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-      <Avatar name={author.name} picture={author.picture} />
+      <p className="text-lg leading-relaxed mb-8">{excerpt}</p>
+      <Link as={`/posts/${slug}`} href="/posts/[slug]">
+        <a className="bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0">
+          Leer Post
+        </a>
+      </Link>
     </div>
   )
 }
