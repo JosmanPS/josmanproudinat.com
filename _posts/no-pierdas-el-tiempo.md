@@ -1,0 +1,144 @@
+---
+title: 'No pierdas el tiempo'
+excerpt: 'Dios no te quita tu llamado, tus dones, ni tu propósito, te lo ha dado por gracia, PERO… Hay cosas que El Señor quiere hacer en momentos específicos y si no te levantas en obediencia, Él levantará a alguien más en tu lugar.'
+coverImage: '/assets/blog/hello-world/cover.jpg'
+date: '2022-03-06'
+author:
+  name: Josman Proudinat
+  picture: '/assets/blog/authors/tim.jpeg'
+ogImage:
+  url: '/assets/blog/hello-world/cover.jpg'
+---
+
+¡Estoy alegre de poder compartir este mensaje contigo!
+
+**Muchas personas después de escucharlo en el servicio general de nuestra iglesia me compartieron que Dios les habló mucho y fue de gran bendición.**
+
+Espero que también lo sea para ti.
+
+Si deseas puedes escuchar el mensaje completo en el siguiente video o leer el resumen que comparto en este post 👇🏼.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/drWAZflprfA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+> Dios no te quita tu llamado, tus dones, ni tu propósito, te lo ha dado por gracia, PERO… Hay cosas que El Señor quiere hacer en momentos específicos y si no te levantas en obediencia, Él levantará a alguien más en tu lugar.
+> 
+
+Este mensaje se basa en uno de los pasajes más conocidos del libro de Esther:
+
+<aside>
+📖 “**13** Entonces Mardoqueo *les* dijo que respondieran a Ester: «No pienses que *estando* en el palacio del rey *solo* tú escaparás entre todos los judíos. **14** Porque **si permaneces callada** en este **tiempo**, **alivio y liberación vendrán de otro lugar** para los judíos, pero tú y la casa de tu padre perecerán. ¿Y quién sabe si para una **ocasión** como esta tú habrás llegado a ser reina?».”
+**Ester 4:13-14**
+
+</aside>
+
+Rápidamente, si no has leído el libro de Ester, o tiene un tiempo que lo leíste por último vez, quiero darte un resumen para poner en contexto el pasaje que acabamos de leer.
+
+## Resumen del libro de Esther
+
+- El libro de Ester comienza cuando la reina Vasti se niega a obedecer una orden de su esposo, el rey Asuero. Por lo tanto es desterrada y comienza la búsqueda de una nueva reina.
+- El rey emitió un decreto para reunir a todas las mujeres hermosas del imperio y traerlas al harem real. Ester, una joven judía, es una de las escogidas para estar en el harem real.
+- El rey Asuero quedó tan impresionado con Ester que la hizo su reina.
+- Mientras tanto, Mardoqueo, el primo hermano y padre de crianza de Ester, llegó a ser empleado del gobierno, y durante el ejercicio de su cargo frustró un complot de asesinato.
+- Pero el ambicioso y egoísta Amán es designado como segundo en poder en el imperio. Cuando Mardoqueo se niega a inclinarse ante él, Amán se enfurece y decide destruir a Mardoqueo y a todos los judíos junto con él.
+- Para llevar a cabo su venganza, engaña al rey y lo persuade para que emita un edicto en el que condene a los judíos a muerte en una fecha específica.
+- Mardoqueo le cuenta a la reina Ester acerca del edicto, y ella arriesga su vida para salvar a su pueblo.
+
+## No somos indispensables
+
+Lo primero que quiero compartir contigo es que ***no somos indispensables***. 
+
+**No somos indispensables, es un privilegio servir a Dios pero Él puede levantar a otro.** Al final, somos llamados por la gracia de Dios, no por nuestros dones, talentos o inteligencia. Así como Dios puede dar Su gracia a nosotros para cumplir un llamado específico, lo puede hacer con alguien más.
+
+Debemos entender que ser llamados por Dios para Su misión es un privilegio no una recompensa, por tanto, debemos honrar y atesorar el privilegio que Dios nos da.
+
+Aunque entendemos que el llamamiento de Dios es irrevocable (Rom. 11:29)... 
+
+<aside>
+💡 ...h**ay cosas que Dios quiere hacer en momentos específicos y que si no nos levantamos nosotros en obediencia, Él levantará a alguien más en nuestro lugar.**
+
+</aside>
+
+Esto era justo lo que Mardoqueo quería hacer entender a Ester cuando le dice: ***“si permaneces callada en este tiempo, alivio y liberación vendrán de otro lugar“.***
+
+El Señor ya había designado que Él iba a liberar a Israel del decreto de muerte que se había establecido en contra de ellos. Y había una oportunidad para que Ester fuera la escogida para lleva a cabo ese plan de Dios.
+
+Ester tenía que obedecer, esto implicaba tomar el riesgo de presentarse delante del rey aún cuando él no la había llamado (lo cual podía ser causa de muerte de acuerdo a las tradiciones persas) para solicitarle que anulara el decreto.
+
+Aunque Dios había escogido a Ester para ello, la misión era más importante que la persona, por tanto, si Ester no obedecía la instrucción, a alguien más levantaría el Señor en su lugar para que Sus planes se llevaran a cabo en la tierra.
+
+## Entendiendo los tiempos de Dios
+
+Dentro de la Biblia encontramos dos **tipos de tiempo** a los que nos podemos referir:
+
+- ***Chronos:*** El cual representa el tiempo natural que vivimos todos. Segundos, minutos, horas, días, años, etc.
+- ***Kairos:*** Representa el tiempo de Dios o temporadas especiales que Él establece para cumplir un propósito.
+
+Hay momentos en los que el ***kairos*** de Dios se intersecta con nuestro ***chronos*** produciendo un tiempo de cumplimiento de Sus promesas para nuestras vidas, pero muchas veces, si no estamos preparados para esa temporada no podríamos perder la bendición que el Señor quería soltar sobre nosotros.
+
+Esto es justo lo que Jesús habla a Israel con palabras fuertes en el libro de Lucas:
+
+<aside>
+📖 Te derribarán a ti y a tus hijos dentro de tus murallas. No dejarán ni una piedra sobre otra, porque **no reconociste el tiempo en que Dios vino a salvarte**.
+**Lucas 19:44 NVI**
+
+</aside>
+
+**Dios tiene temporadas especiales *(kairos)* preparadas para nuestras vidas, pero si no administramos bien el tiempo *(chronos)* nos perderemos de ellas.**
+
+<aside>
+📖 “**13** Entonces Mardoqueo *les* dijo que respondieran a Ester: «No pienses que *estando* en el palacio del rey *solo* tú escaparás entre todos los judíos. **14** Porque si permaneces callada en este **tiempo**, alivio y liberación vendrán de otro lugar para los judíos, pero tú y la casa de tu padre perecerán. ¿Y quién sabe si para una **ocasión** como esta tú habrás llegado a ser reina?».”
+**Ester 4:13-14**
+
+</aside>
+
+En el pasaje que estamos desarrollando podemos inferir estos dos tipos de temporalidades representados por las palabras ***tiempo*** y ***ocasión***:
+
+- **Ocasión.** Dios ya había establecido un tiempo *kairos* para Israel. Una temporada de liberación sobrenatural, lo cual iba a suceder aunque todo lo humano se opusiera, ya fuera a través de Ester, o de alguien más que el Señor levantaría.
+- **Tiempo.** Esther tenía una indicación clara de Dios, “no permanecer callada”, y tenía una fecha límite. Ella solo podría entrar al ***kairos*** de Dios si obedecía la instrucción en el ***chronos***.
+
+Nuevamente te quiero decir:
+
+<aside>
+💡 Si no administramos bien el ***chronos*** nos perderemos los ***kairos*** de Dios.
+
+</aside>
+
+No sé tú, pero yo no quiero estar desprevenido para cuando Dios tenga una temporada especial de cumplimiento para mi vida. Quiero que Él me encuentre listo y poder entrar a lo que Él tiene planeado para mí.
+
+**¡Por eso no podemos perder el tiempo!**
+
+Si de verdad tienes fe de las grandes cosas que Dios quiere hacer contigo, no puedes estar en una posición pasiva de decir *“algún día sucederá”*. ¡No! La fe se ve reflejada en nuestras obras.
+
+Si yo le creo al Señor que Él me ha hablado de empresas, desde hoy aprovecho mi *chronos* para estudiar administración, finanzas, emprendimiento, leer todos los libros que pueda, empezar a imaginar ideas de negocio, estudiar los mercados, etc. para que cuando el tiempo de cumplimiento venga me agarre listo y Dios no tenga que buscar a alguien más.
+
+Si Dios me ha hablado de una ONG que beneficiará a muchos, no puedo pensar que algún día sucederá por sí sola. Debo prepararme. Hacer planes, proyectos, escribirlos, compartirlos con otros. Qué tal si llega el día en el que Dios te conecta con las personas que van a ser columnas para los proyectos que están en tu corazón pero no tienes nada sólido que presentarles. Seguramente te perderás la temporada de Dios y Él tendrá que levantar a alguien más.
+
+O puede que Dios te ha hablado de ministerio. Un error es quererte adelantar al tiempo de Dios y auto-enviarte, pero si la promesa está, en algún momento el Señor preparará la temporada en que serás enviado. **Pero, ¿cómo te estás preparando para ese día?** ¿Estás estudiando las Escrituras a profundidad? ¿pasando tiempo de comunión con Dios? ¿sirviendo en la casa donde Dios te ha plantado?
+
+### Mi primera predicación
+
+Desde que yo tenía como 13 años comenzó en mí un deseo por predicar y enseñar la Palabra de Dios. Ahora entiendo que era una pasión que Dios mismo puso en mi interior porque me estaba llamando para eso.
+
+Una vez tuve el atrevimiento de decirle a quien era mi pastor en aquel entonces que yo quería predicar y preguntarle si algún día me permitiría predicar en la iglesia.
+
+Mucho tiempo después, estábamos en una reunión general de la iglesia, el tiempo de alabanza y adoración había terminado, se estaban compartiendo los anuncios para entrar al momento de la predicación, cuando alguien me llamó indicándome que el pastor quería hablar conmigo en su oficina.
+
+Yo pensé que lo que querían era regañarme, probablemente le hice una cara a algún músico mientras estábamos en el tiempo de adoración (yo era parte de ese equipo) e iban a corregirme (como a menudo me pasaba en ese entonces 😂).
+
+Pero el pastor me llamó para preguntarme si quería predicar ese día, que él recordaba que un día yo le había dicho que quería predicar y ese día él se sentía mal y necesitaba que alguien lo supliera. 
+
+¡Solo faltaban unos minutos para el tiempo de la prédica! Pero me puse a pensar, y sentí en mi interior que si no decía que sí en ese momento, la oportunidad no se volvería a repetir en muchos años. Así que acepté.
+
+Lo que te quiero comentar es que, aunque me dijeron solo unos minutos antes del tiempo de la predicación, yo estaba listo. Porque desde que Dios puso en mi corazón el deseo de predicar comencé a escribir mis bosquejos. No tenía un lugar donde predicar, pero yo quería que cuando llegara el tiempo estuviera listo.
+
+Poco tiempo después, me enteré que ese día yo no era la primera opción del pastor. ¡Obviamente! Era muy joven y habían muchos otros líderes con más preparación que yo. Pero la persona que él llamó ese día antes dijo que no a la invitación, que no se sentía listo.
+
+Cuando no estamos listos, Dios levanta a alguien más en nuestro lugar. ¡Gracias a Dios que Él me dio esa oportunidad!
+
+## Toma acción ✅
+
+¿Qué es lo que Dios te ha prometido? ¿Cuáles son los sueños que Él ha depositado en tu corazón? ¿Cuáles son las palabras proféticas que has recibido que sabes que vienen de parte de Él?
+
+Tú no sabes cuándo será el *kairos*, la temporada de cumplimiento. Pero si Dios lo hablado, ten por seguro que vendrá.
+
+¿Pero cómo estás administrando tu tiempo *chronos*? ¿Vas a estar preparado?
