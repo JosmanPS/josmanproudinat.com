@@ -14,6 +14,7 @@ import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 import PostType from '../../types/post'
+import GetRevueForm from '../../components/GetRevueForm'
 
 type Props = {
   post: PostType
@@ -29,29 +30,32 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
   }
   return (
     <Layout preview={preview}>
-      <Container>
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            <article className="mb-32">
-              <Head>
-                <title>
-                  {post.title} | Josman Proudinat
-                </title>
-                <meta property="og:image" content={post.ogImage.url} />
-              </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                author={post.author}
-              />
-              <PostBody content={post.content} source={source} />
-            </article>
-          </>
-        )}
-      </Container>
+      <div className='py-8'>
+        <Container>
+          {router.isFallback ? (
+            <PostTitle>Loading…</PostTitle>
+          ) : (
+            <>
+              <article className="mb-12 pt-12">
+                <Head>
+                  <title>
+                    {post.title} | Josman Proudinat
+                  </title>
+                  <meta property="og:image" content={post.ogImage.url} />
+                </Head>
+                <PostHeader
+                  title={post.title}
+                  coverImage={post.coverImage}
+                  date={post.date}
+                  author={post.author}
+                />
+                <PostBody content={post.content} source={source} />
+              </article>
+            </>
+          )}
+          <GetRevueForm />
+        </Container>
+      </div>
     </Layout>
   )
 }
