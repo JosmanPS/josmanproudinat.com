@@ -5,7 +5,7 @@ export default function BrandName() {
   return (
     <h2 className="text-xl md:text-2xl font-bold tracking-tight md:tracking-tighter leading-tight">
       <Link href="/">
-        <a className="hover:underline">JosmanProudinat</a>
+        <a className="no-underline hover:underline hover:text-black">JosmanProudinat</a>
       </Link>
       .
     </h2>

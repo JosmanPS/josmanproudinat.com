@@ -5,7 +5,7 @@ const Intro = () => {
     <section className="flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
       <div>
         <h1 className="text-2xl md:text-4xl font-bold tracking-tighter leading-tight md:pr-8">
-          Hola, soy Josman Proudinat. 👋
+          Hola, soy Josman 👋
         </h1>
         <p className="text-center md:text-left text-lg mt-5 leading-10">
           He creado este espacio para compartir mis notas, predicaciones y
