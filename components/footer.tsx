@@ -8,7 +8,9 @@ const Footer = () => {
     <footer className="bg-neutral-50 border-t border-neutral-200">
       <Container>
         <div className="py-12 flex flex-col lg:flex-row items-center lg:justify-between">
-          <BrandName />
+          <div className='mb-4'>
+           <BrandName />
+          </div>
           <div>
             <CircleIcon
               href={`https://twitter.com/JosmanProudinat`}
