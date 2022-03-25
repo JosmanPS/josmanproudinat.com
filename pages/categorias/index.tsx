@@ -6,6 +6,7 @@ import Layout from '../../components/layout'
 import { getAllPosts } from '../../lib/api'
 import Category from '../../@types/Category'
 import CategoryListItem from '../../components/Categories/CategoryListItem'
+import PageTitle from '../../components/PageTitle'
 
 type Props = {
   categories: Category[]
@@ -19,9 +20,7 @@ export default function categorias({ categories }: Props) {
       </Head>
       <Container>
         <section className="py-8">
-          <h1 className="text-2xl md:text-4xl font-bold tracking-tighter leading-tight md:pr-8">
-            Categorías
-          </h1>
+          <PageTitle>Categorías</PageTitle>
           <p className="text-lg mt-2 mb-12 leading-10">
             Encuentra diferentes posts de eneseñanzas de acuerdo a su categoría.
           </p>
