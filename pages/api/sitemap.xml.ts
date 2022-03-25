@@ -50,13 +50,13 @@ const createSitemap = (
               <loc>${host}/categorias/${category.slug}</loc>
             </url>
           `.trim()
-      )}
+      ).join('')}
 
       ${posts
         .map((post) =>
           `
             <url>
-              <loc>${host}/blog/${post.slug}</loc>
+              <loc>${host}/posts/${post.slug}</loc>
             </url>
           `.trim()
         )

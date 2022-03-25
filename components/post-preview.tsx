@@ -27,7 +27,7 @@ const PostPreview = ({
         <CoverImage slug={slug} title={title} src={coverImage} />
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
-        <Link as={`/blog/${slug}`} href="/blog/[slug]">
+        <Link as={`/posts/${slug}`} href="/posts/[slug]">
           <a className="hover:underline">{title}</a>
         </Link>
       </h3>
@@ -35,7 +35,7 @@ const PostPreview = ({
         <DateFormatter dateString={date} />
       </div>
       <p className="text-lg leading-relaxed mb-8">{excerpt}</p>
-      <Link as={`/blog/${slug}`} href="/blog/[slug]">
+      <Link as={`/posts/${slug}`} href="/posts/[slug]">
         <a className="bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0">
           Leer Post
         </a>
