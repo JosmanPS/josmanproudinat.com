@@ -61,8 +61,9 @@ export function getAllCategories(): Category[] {
   tagsList.forEach((tag) => {
     if (!Object.keys(tagsDict).includes(tag)) {
       tagsDict[tag] = 1
+    } else {
+      tagsDict[tag] += 1
     }
-    tagsDict[tag] += 1
   })
 
   const categories: Category[] = Object.entries(tagsDict)
@@ -73,4 +74,26 @@ export function getAllCategories(): Category[] {
     .sort((a, b) => b.nPosts - a.nPosts)
 
   return categories
+}
+
+export function getCategoryBySlug(slug: string) {
+  const categories = getAllCategories()
+  return categories.find((category) => (
+    category.slug === slug
+  ))
+}
+
+export function getPostsByCategory(category: string) {
+  const posts = getAllPosts([
+    'title',
+    'date',
+    'slug',
+    'author',
+    'coverImage',
+    'excerpt',
+    'tags',
+  ])
+  return posts.filter((post) => (
+    post.tags.includes(category)
+  ))
 }
