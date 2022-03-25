@@ -1,6 +1,8 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
+import slugify from 'slugify'
+import Category from '../@types/Category'
 
 const postsDirectory = join(process.cwd(), '_posts')
 
@@ -44,4 +46,31 @@ export function getAllPosts(fields: string[] = []) {
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
   return posts
+}
+
+export function getAllCategories(): Category[] {
+  const posts = getAllPosts(['tags'])
+
+  const tagsList: string[] = []
+  posts.forEach((post) => {
+    const tags = post.tags.trim().split(',')
+    tagsList.push(...tags)
+  })
+
+  const tagsDict: { [key: string]: number } = {}
+  tagsList.forEach((tag) => {
+    if (!Object.keys(tagsDict).includes(tag)) {
+      tagsDict[tag] = 1
+    }
+    tagsDict[tag] += 1
+  })
+
+  const categories: Category[] = Object.entries(tagsDict)
+    .map(([key, value]) => {
+      const slug = slugify(key, { trim: true, lower: true })
+      return { name: key, slug, nPosts: value }
+    })
+    .sort((a, b) => b.nPosts - a.nPosts)
+
+  return categories
 }
