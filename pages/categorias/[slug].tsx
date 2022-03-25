@@ -10,6 +10,7 @@ import {
 import Container from '../../components/container'
 import MoreStories from '../../components/more-stories'
 import PostTitle from '../../components/post-title'
+import PostImageHeader from '../../components/PostImageHeader'
 
 type Props = {
   category: Category
@@ -26,13 +27,15 @@ export default function CategoryPosts({ category, posts }: Props) {
           Josman Proudinat
         </title>
       </Head>
-      <Container>
-        <section className="py-8">
-          <PostTitle>{category.name}</PostTitle>
-
-          <MoreStories posts={posts} />
-        </section>
-      </Container>
+      <section>
+        <PostImageHeader post={posts[0]} />
+        <Container>
+          <div className='py-8'>
+            <PostTitle>{category.name}</PostTitle>
+            <MoreStories posts={posts} />
+          </div>
+        </Container>
+      </section>
     </Layout>
   )
 }
