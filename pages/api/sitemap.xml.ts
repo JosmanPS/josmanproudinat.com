@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { host } from '../../lib/config'
 import { getAllCategories, getAllPosts } from '../../lib/api'
-import Category from '../../@types/Category'
+import Category from '../../types/Category'
 
 export default async (
   req: NextApiRequest,

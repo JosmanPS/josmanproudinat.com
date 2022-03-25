@@ -2,7 +2,7 @@ import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
 import slugify from 'slugify'
-import Category from '../@types/Category'
+import Category from '../types/Category'
 
 const postsDirectory = join(process.cwd(), '_posts')
 

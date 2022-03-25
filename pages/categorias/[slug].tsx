@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import Category from '../../@types/Category'
+import Category from '../../types/Category'
 import Layout from '../../components/layout'
 import {
   getAllCategories,
