@@ -36,7 +36,6 @@ const Meta = () => {
         name="description"
         content='Predicaciones y enseñanzas bíblicas cristianas compartidas por Josman Proudinat.'
       />
-      <meta property="og:image" content={HOME_OG_IMAGE_URL} />
     </Head>
   )
 }
