@@ -15,6 +15,7 @@ import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 import PostType from '../../types/post'
 import GetRevueForm from '../../components/GetRevueForm'
+import PostImageHeader from '../../components/PostImageHeader'
 
 type Props = {
   post: PostType
@@ -30,7 +31,8 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
   }
   return (
     <Layout preview={preview}>
-      <div className='py-8'>
+      <div className='pb-8'>
+        <PostImageHeader post={post} />
         <Container>
           {router.isFallback ? (
             <PostTitle>Loading…</PostTitle>
