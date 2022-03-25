@@ -37,7 +37,7 @@ const createSitemap = (posts: any[]) => `<?xml version="1.0" encoding="UTF-8"?>
         .map((post) =>
           `
             <url>
-              <loc>${host}/posts/${post.slug}</loc>
+              <loc>${host}/blog/${post.slug}</loc>
             </url>
           `.trim()
         )
