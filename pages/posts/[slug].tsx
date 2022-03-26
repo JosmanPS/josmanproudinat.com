@@ -21,7 +21,7 @@ import useOpenGraphImage from '../../hooks/useOpenGraphImage'
 type Props = {
   post: PostType
   morePosts: PostType[]
-  preview?: boolean,
+  preview?: boolean
   source: MDXRemoteSerializeResult
 }
 
@@ -35,7 +35,7 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
 
   return (
     <Layout preview={preview}>
-      <div className='pb-8'>
+      <div className="pb-8">
         <PostImageHeader post={post} />
         <Container>
           {router.isFallback ? (
@@ -44,12 +44,16 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
             <>
               <article className="mb-12 pt-12">
                 <Head>
-                  <title>
-                    {post.title} | Josman Proudinat
-                  </title>
+                  <title>{post.title} | Josman Proudinat</title>
                   <meta property="og:image" content={imageURL} />
                   <meta name="description" content={post.excerpt} />
                   <meta property="og:description" content={post.excerpt} />
+                  <meta property="twitter:title" content={post.title} />
+                  <meta
+                    property="twitter:image"
+                    content={imageURL}
+                  />
+                  <meta name="twitter:card" content="summary_large_image"/>
                 </Head>
                 <PostHeader
                   title={post.title}
@@ -94,7 +98,7 @@ export async function getStaticProps({ params }: Params) {
   const {
     content,
     data: { title, description, date },
-  } = matter(postContent);
+  } = matter(postContent)
 
   const source = await serialize(content)
 
