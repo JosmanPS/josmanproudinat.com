@@ -14,7 +14,7 @@ type Props = {
 
 export default function PostOpenGraphImage({ post }: Props) {
   return (
-    <div style={{ width: '1200px', height: '630px' }} className="bg-slate-100 flex flex-row">
+    <div style={{ width: '1440px', height: '810px' }} className="bg-slate-100 flex flex-row">
       <div style={{ width: '60%', height: '100%' }} className="bg-slate-500 relative">
         <NextImage
           src={post.ogImage.url}
@@ -26,7 +26,7 @@ export default function PostOpenGraphImage({ post }: Props) {
       <div className='w-full p-16 flex flex-col justify-center'>
         <PostTitle>{ post.title }</PostTitle>
         <Avatar name={post.author.name} picture={post.author.picture} />
-        <p className='font-medium text-lg mt-12 mb-12'>{ post.excerpt }</p>
+        <p className='font-medium text-3xl mt-12 mb-12 leading-10'>{ post.excerpt }</p>
       </div>
     </div>
   )
