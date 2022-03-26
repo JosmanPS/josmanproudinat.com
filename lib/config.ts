@@ -4,11 +4,9 @@ export const isDev =
 export const port = '3000'
 export const domain = 'www.josmanproudinat.com'
 
-export function getAbsoluteUrl(path: string) {
-  const baseURL = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'http://localhost:3000'
-  return baseURL + path
-}
 
 export const host = isDev ? `http://localhost:${port}` : `https://${domain}`
+
+export function getAbsoluteUrl(path: string) {
+  return host + path
+}
