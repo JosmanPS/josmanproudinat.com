@@ -16,6 +16,7 @@ import markdownToHtml from '../../lib/markdownToHtml'
 import PostType from '../../types/post'
 import GetRevueForm from '../../components/GetRevueForm'
 import PostImageHeader from '../../components/PostImageHeader'
+import useOpenGraphImage from '../../hooks/useOpenGraphImage'
 
 type Props = {
   post: PostType
@@ -29,7 +30,9 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
-  console.log(post.ogImage.url)
+
+  const { imageURL } = useOpenGraphImage()
+
   return (
     <Layout preview={preview}>
       <div className='pb-8'>
@@ -44,7 +47,7 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
                   <title>
                     {post.title} | Josman Proudinat
                   </title>
-                  <meta property="og:image" content={post.ogImage.url} />
+                  <meta property="og:image" content={imageURL} />
                   <meta name="description" content={post.excerpt} />
                   <meta property="og:description" content={post.excerpt} />
                 </Head>
