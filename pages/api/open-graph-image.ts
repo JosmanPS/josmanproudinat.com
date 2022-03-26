@@ -15,8 +15,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   // 1200x630 is a good size for most social media sites
   const page = await browser.newPage({
     viewport: {
-      width: 1200,
-      height: 630
+      width: 1440,
+      height: 810
     }
   });
 
