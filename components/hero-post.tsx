@@ -26,21 +26,25 @@ const HeroPost = ({
         Último post
       </h2>
       <div>
-        <CoverImage title={title} src={coverImage} slug={slug} />
-        <h3 className="mb-4 mt-4 text-4xl lg:text-5xl leading-tight">
-          <Link as={`/posts/${slug}`} href="/posts/[slug]">
-            <a className="hover:underline">{title}</a>
-          </Link>
-        </h3>
-        <div className="text-lg mb-4">
-          <DateFormatter dateString={date} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-8">
+          <CoverImage title={title} src={coverImage} slug={slug} />
+          <div>
+            <h3 className="mb-4 mt-8 lg:mt-0 text-4xl lg:text-5xl leading-tight">
+              <Link as={`/posts/${slug}`} href="/posts/[slug]">
+                <a className="hover:underline">{title}</a>
+              </Link>
+            </h3>
+            <div className="text-lg mb-4">
+              <DateFormatter dateString={date} />
+            </div>
+            <p className="text-lg leading-relaxed mb-8">{excerpt}</p>
+            <Link as={`/posts/${slug}`} href="/posts/[slug]">
+              <a className="bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0">
+                Leer Post
+              </a>
+            </Link>
+          </div>
         </div>
-        <p className="text-lg leading-relaxed mb-8">{excerpt}</p>
-        <Link as={`/posts/${slug}`} href="/posts/[slug]">
-          <a className="bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0">
-            Leer Post
-          </a>
-        </Link>
       </div>
     </section>
   )
