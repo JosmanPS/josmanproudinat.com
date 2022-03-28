@@ -49,11 +49,8 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
                   <meta name="description" content={post.excerpt} />
                   <meta property="og:description" content={post.excerpt} />
                   <meta property="twitter:title" content={post.title} />
-                  <meta
-                    property="twitter:image"
-                    content={imageURL}
-                  />
-                  <meta name="twitter:card" content="summary_large_image"/>
+                  <meta property="twitter:image" content={imageURL} />
+                  <meta name="twitter:card" content="summary_large_image" />
                 </Head>
                 <PostHeader
                   title={post.title}
@@ -67,7 +64,9 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
               </article>
             </>
           )}
-          <GetRevueForm />
+          <div className="max-w-4xl mx-auto">
+            <GetRevueForm />
+          </div>
         </Container>
       </div>
     </Layout>
