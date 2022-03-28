@@ -1,7 +1,7 @@
 import Container from '../components/container'
 import MoreStories from '../components/more-stories'
 import HeroPost from '../components/hero-post'
-import Intro from '../components/intro'
+import Intro from '../components/Intro'
 import Layout from '../components/layout'
 import { getAllPosts } from '../lib/api'
 import Head from 'next/head'
@@ -22,8 +22,9 @@ const Index = ({ allPosts }: Props) => {
           <title>Josman Proudinat</title>
           <meta property="og:image" content={HOME_OG_IMAGE_URL} />
         </Head>
+        <Intro />
         <Container>
-          <Intro />
+          <div id="ultimo-post"></div>
           {heroPost && (
             <HeroPost
               title={heroPost.title}
