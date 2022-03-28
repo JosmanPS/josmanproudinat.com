@@ -17,7 +17,7 @@ const Index = ({ allPosts }: Props) => {
   const morePosts = allPosts.slice(1)
   return (
     <>
-      <Layout>
+      <Layout headerDark>
         <Head>
           <title>Josman Proudinat</title>
           <meta property="og:image" content={HOME_OG_IMAGE_URL} />

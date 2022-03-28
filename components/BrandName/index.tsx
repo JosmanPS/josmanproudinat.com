@@ -1,11 +1,19 @@
 import React from 'react'
 import Link from 'next/link'
 
-export default function BrandName() {
+type Props = {
+  white?: boolean
+}
+
+export default function BrandName({ white }: Props) {
+  const colorClass = !!white
+    ? 'text-white hover:text-white'
+    : 'hover:text-black'
+
   return (
-    <h2 className="text-xl md:text-2xl font-bold tracking-tight md:tracking-tighter leading-tight">
+    <h2 className={'text-xl md:text-2xl font-bold tracking-tight md:tracking-tighter leading-tight ' + colorClass}>
       <Link href="/">
-        <a className="no-underline hover:underline hover:text-black">JosmanProudinat</a>
+        <a className={'no-underline hover:underline'}>Josman</a>
       </Link>
       .
     </h2>

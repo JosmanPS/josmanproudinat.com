@@ -5,15 +5,16 @@ import Meta from './meta'
 
 type Props = {
   preview?: boolean
+  headerDark?: boolean
   children: React.ReactNode
 }
 
-const Layout = ({ preview, children }: Props) => {
+const Layout = ({ preview, children, headerDark }: Props) => {
   return (
     <>
       <Meta />
       <div className="min-h-screen">
-        <Header />
+        <Header dark={headerDark} />
         <main>{children}</main>
       </div>
       <Footer />
