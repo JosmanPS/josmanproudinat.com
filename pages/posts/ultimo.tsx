@@ -8,7 +8,7 @@ export default function ultimo() {
 }
 
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const allPosts = getAllPosts([
     'slug',
   ])
