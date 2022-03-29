@@ -11,6 +11,7 @@ export default function ultimo() {
 export async function getServerSideProps() {
   const allPosts = getAllPosts([
     'slug',
+    'date',
   ])
   const lastPost = allPosts[0]
   return {
