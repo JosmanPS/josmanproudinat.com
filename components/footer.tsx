@@ -5,7 +5,7 @@ import CircleIcon from './CircleIcon'
 
 const Footer = () => {
   return (
-    <footer className="bg-neutral-50 border-t border-neutral-200">
+    <footer className="bg-neutral-50 border-t border-neutral-200 dark:bg-neutral-900 dark:border-neutral-700">
       <Container>
         <div className="py-12 flex flex-col lg:flex-row items-center lg:justify-between">
           <div className='mb-4'>

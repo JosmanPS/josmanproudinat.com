@@ -3,6 +3,7 @@ import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
 import Author from '../types/author'
+import ButtonPrimary from './ButtonPrimary'
 
 type Props = {
   title: string
@@ -34,12 +35,10 @@ const PostPreview = ({
       <div className="text-lg mb-4">
         <DateFormatter dateString={date} />
       </div>
-      <p className="text-lg leading-relaxed mb-8">{excerpt}</p>
-      <Link as={`/posts/${slug}`} href="/posts/[slug]">
-        <a className="bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0">
-          Leer Post
-        </a>
-      </Link>
+      <p className="text-lg leading-relaxed mb-8 dark:text-neutral-400">{excerpt}</p>
+      <ButtonPrimary href={`/posts/${slug}`}>
+        Leer Post
+      </ButtonPrimary>
     </div>
   )
 }

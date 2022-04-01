@@ -3,5 +3,41 @@
 @tailwind utilities;
 
 .btn-primary {
-  @apply bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0
+  @apply bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0 dark:text-black dark:bg-neutral-100 dark:border-white dark:hover:bg-transparent dark:hover:text-white
+}
+
+input {
+  @apply dark:bg-neutral-600
+}
+
+input::placeholder {
+  @apply dark:text-neutral-400
+}
+
+textarea {
+  @apply dark:bg-neutral-600
+}
+
+.prose {
+  @apply dark:text-neutral-400
+}
+
+b, strong .prose {
+  @apply dark:text-neutral-400
+}
+
+.prose :where(strong):not(:where([class~="not-prose"] *)) {
+  @apply dark:text-neutral-400
+}
+
+h1, h2, h3, h4, h5, h6 .prose {
+  @apply dark:text-neutral-100
+}
+
+a .prose {
+  @apply dark:text-neutral-100
+}
+
+.prose :where(a):not(:where([class~="not-prose"] *)) {
+  @apply dark:text-neutral-300
 }

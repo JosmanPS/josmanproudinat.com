@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function GetRevueForm() {
   return (
-    <div className='bg-neutral-50 border border-neutral-200 py-8 px-6 mb-8'>
+    <div className='bg-neutral-50 border border-neutral-200 dark:bg-neutral-800 dark:border-neutral-600 py-8 px-6 mb-8'>
       <h2 className='text-3xl font-bold mb-4'>¡Suscríbete!</h2>
       <p className='mb-4'>
         Si deseas ser notificado cada vez que se publique un nuevo post, te

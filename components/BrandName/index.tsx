@@ -8,7 +8,7 @@ type Props = {
 export default function BrandName({ white }: Props) {
   const colorClass = !!white
     ? 'text-white hover:text-white'
-    : 'hover:text-black'
+    : 'hover:text-black dark:text-white'
 
   return (
     <h2 className={'text-xl md:text-2xl font-bold tracking-tight md:tracking-tighter leading-tight ' + colorClass}>

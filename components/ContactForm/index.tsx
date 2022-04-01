@@ -10,7 +10,7 @@ export default function ContactForm() {
       {state.succeeded && <Alert type="success">
         ✅ Tu mensaje ha sido enviado. Pronto me pondré en contacto contigo 😁.
       </Alert>}
-      <div className="bg-neutral-50 border border-neutral-200 py-8 px-6 mb-8">
+      <div className="bg-neutral-50 border border-neutral-200 dark:bg-neutral-800 dark:border-neutral-600 py-8 px-6 mb-8">
         <form onSubmit={handleSubmit}>
           <input
             type="hidden"

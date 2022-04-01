@@ -7,9 +7,9 @@ type Props = {
 
 export default function Callout({ children, type }: Props) {
   const bgColors: { [key: string]: string } = {
-    default: 'bg-gray-100',
-    idea: 'bg-amber-50',
-    info: 'bg-blue-50',
+    default: 'bg-gray-100 dark:bg-gray-800',
+    idea: 'bg-amber-50 dark:bg-yellow-800',
+    info: 'bg-blue-50 dark:bg-slate-800',
   }
 
   const bgColor = !!type

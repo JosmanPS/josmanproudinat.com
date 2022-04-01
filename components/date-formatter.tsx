@@ -21,7 +21,7 @@ const DateFormatter = ({ dateString }: Props) => {
     'Diciembre',
   ]
   return (
-    <time dateTime={dateString}>
+    <time dateTime={dateString} className="dark:text-neutral-400">
       {`${meses[date.getMonth()]} ${date.getDate()}, ${date.getUTCFullYear()}`}
     </time>
   )
