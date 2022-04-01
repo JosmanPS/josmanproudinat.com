@@ -89,7 +89,7 @@ const Header = ({ dark }: Props) => {
       <Container>
         <div className="container flex flex-wrap justify-between items-center mx-auto pt-6 pb-6">
           <BrandName white={dark} />
-          <div className='flex flex-row'>
+          <div className='flex flex-row md:hidden'>
             <DarkModeSwitch />
             <ToggleButton />
           </div>
