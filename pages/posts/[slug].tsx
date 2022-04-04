@@ -43,7 +43,6 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
                 <Head>
                   <title>{post.title} | Josman Proudinat</title>
                   <meta property="og:image" content={imageURL} />
-                  <meta property="og:image" content={post.ogImage.url} />
                   <meta name="description" content={post.excerpt} />
                   <meta property="og:description" content={post.excerpt} />
                   <meta property="twitter:title" content={post.title} />
