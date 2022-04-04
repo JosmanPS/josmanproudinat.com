@@ -3,7 +3,6 @@ import React from 'react'
 import { serialize } from 'next-mdx-remote/serialize'
 import NextImage from 'next/image'
 import { getAllPosts, getPostBySlug } from '../../../lib/api'
-import markdownToHtml from '../../../lib/markdownToHtml'
 import PostType from '../../../types/post'
 import PostTitle from '../../../components/post-title'
 import Avatar from '../../../components/avatar'
@@ -50,11 +49,10 @@ export async function getStaticProps({ params }: Params) {
     'excerpt',
     'tags',
   ])
-  const postContent = await markdownToHtml(post.content || '')
   const {
     content,
     data: { title, description, date },
-  } = matter(postContent)
+  } = matter(post.content)
 
   const source = await serialize(content)
 
