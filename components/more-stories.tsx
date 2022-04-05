@@ -48,7 +48,7 @@ const MoreStories = ({ posts }: Props) => {
       <div>
         {lastPostIndex + 1 < posts.length && (
           <button
-            className="bg-transparent border border-black hover:bg-black hover:text-white w-full font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-12"
+            className="btn-primary-outline w-full mb-12"
             onClick={onShowMore}
           >
             Ver más posts
