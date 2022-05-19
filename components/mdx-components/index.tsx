@@ -1,6 +1,7 @@
 import NextImage from 'next/image'
 import YoutubeEmbed from '../YoutubeEmbed'
 import Callout from '../Callout'
+import TweetEmbed from '../TweetEmbed'
 
 const Image = (props: any) => {
   return (
@@ -11,7 +12,8 @@ const Image = (props: any) => {
 const MDXComponents = {
   img: Image,
   YoutubeEmbed,
-  Callout
+  Callout,
+  TweetEmbed,
 }
 
 export default MDXComponents
