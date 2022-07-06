@@ -1,14 +1,17 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { host } from '../../lib/config'
-import { getAllCategories, getAllPosts } from '../../lib/api'
-import Category from '../../types/Category'
+import { NextApiRequest, NextApiResponse, GetServerSideProps } from 'next'
+import { host } from '../lib/config'
+import { getAllCategories, getAllPosts } from '../lib/api'
+import Category from '../types/Category'
 
-export default async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (req.method !== 'GET') {
-    return res.status(405).send({ error: 'method not allowed' })
+    res.statusCode = 405
+    res.setHeader('Content-Type', 'application/json')
+    res.write(JSON.stringify({ error: 'method not allowed' }))
+    res.end()
+    return {
+      props: {},
+    }
   }
 
   const posts = getAllPosts(['slug'])
@@ -24,6 +27,10 @@ export default async (
 
   res.write(createSitemap(posts, categories))
   res.end()
+
+  return {
+    props: {},
+  }
 }
 
 const createSitemap = (
@@ -43,14 +50,15 @@ const createSitemap = (
         <loc>${host}/categorias</loc>
       </url>
 
-      ${categories.map(
-        (category) =>
+      ${categories
+        .map((category) =>
           `
             <url>
               <loc>${host}/categorias/${category.slug}</loc>
             </url>
           `.trim()
-      ).join('')}
+        )
+        .join('')}
 
       ${posts
         .map((post) =>
@@ -63,3 +71,5 @@ const createSitemap = (
         .join('')}
     </urlset>
     `
+
+export default () => null
