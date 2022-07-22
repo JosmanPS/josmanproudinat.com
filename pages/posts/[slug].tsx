@@ -28,7 +28,7 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
     return <ErrorPage statusCode={404} />
   }
 
-  const { imageURL } = useOpenGraphImage()
+  // const { imageURL } = useOpenGraphImage()
 
   return (
     <Layout preview={preview}>
@@ -42,11 +42,11 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
               <article className="mb-12 pt-12">
                 <Head>
                   <title>{post.title} | Josman Proudinat</title>
-                  <meta property="og:image" content={imageURL} />
+                  <meta property="og:image" content={post.ogImage.url} />
                   <meta name="description" content={post.excerpt} />
                   <meta property="og:description" content={post.excerpt} />
                   <meta property="twitter:title" content={post.title} />
-                  <meta property="twitter:image" content={imageURL} />
+                  <meta property="twitter:image" content={post.ogImage.url} />
                   <meta name="twitter:card" content="summary_large_image" />
                 </Head>
                 <PostHeader
