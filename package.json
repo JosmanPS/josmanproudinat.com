@@ -15,6 +15,7 @@
     "gray-matter": "^4.0.3",
     "next": "latest",
     "next-mdx-remote": "^4.0.0",
+    "next-seo": "^5.5.0",
     "next-themes": "^0.1.1",
     "playwright-core": "^1.20.1",
     "react": "^17.0.2",

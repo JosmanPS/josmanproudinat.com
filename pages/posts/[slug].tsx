@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 import ErrorPage from 'next/error'
 import matter from 'gray-matter'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
@@ -9,11 +10,10 @@ import PostHeader from '../../components/post-header'
 import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
-import Head from 'next/head'
 import PostType from '../../types/post'
 import GetRevueForm from '../../components/GetRevueForm'
 import PostImageHeader from '../../components/PostImageHeader'
-import useOpenGraphImage from '../../hooks/useOpenGraphImage'
+
 
 type Props = {
   post: PostType
@@ -40,15 +40,19 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
           ) : (
             <>
               <article className="mb-12 pt-12">
-                <Head>
-                  <title>{post.title} | Josman Proudinat</title>
-                  <meta property="og:image" content={post.ogImage.url} />
-                  <meta name="description" content={post.excerpt} />
-                  <meta property="og:description" content={post.excerpt} />
-                  <meta property="twitter:title" content={post.title} />
-                  <meta property="twitter:image" content={post.ogImage.url} />
-                  <meta name="twitter:card" content="summary_large_image" />
-                </Head>
+                <NextSeo
+                  title={`${post.title} | Josman Proudinat`}
+                  description={post.excerpt}
+                  openGraph={{
+                    type: 'website',
+                    locale: 'es',
+                    site_name: 'Josman Proudinat',
+                    images: [{ url: post.ogImage.url }]
+                  }}
+                  twitter={{
+                    cardType: 'summary_large_image'
+                  }}
+                />
                 <PostHeader
                   title={post.title}
                   coverImage={post.coverImage}
