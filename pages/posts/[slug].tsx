@@ -13,6 +13,7 @@ import PostTitle from '../../components/post-title'
 import PostType from '../../types/post'
 import GetRevueForm from '../../components/GetRevueForm'
 import PostImageHeader from '../../components/PostImageHeader'
+import SubstackForm from '../../components/SubstackForm'
 
 
 type Props = {
