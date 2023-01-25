@@ -11,6 +11,7 @@ type Props = {
   excerpt: string
   author: Author
   slug: string
+  ogImage: { url: string }
 }
 
 const HeroPost = ({
@@ -20,6 +21,7 @@ const HeroPost = ({
   excerpt,
   author,
   slug,
+  ogImage,
 }: Props) => {
   return (
     <section className="py-16">
@@ -28,7 +30,7 @@ const HeroPost = ({
       </h2>
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-8">
-          <CoverImage title={title} src={coverImage} slug={slug} />
+          <CoverImage title={title} src={ogImage?.url || coverImage} slug={slug} />
           <div>
             <h3 className="mb-4 mt-8 lg:mt-0 text-4xl lg:text-5xl leading-tight">
               <Link as={`/posts/${slug}`} href="/posts/[slug]">

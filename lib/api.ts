@@ -92,6 +92,7 @@ export function getPostsByCategory(category: string) {
     'coverImage',
     'excerpt',
     'tags',
+    'ogImage',
   ])
   return posts.filter((post) => (
     post.tags.includes(category)
