@@ -6,7 +6,7 @@ type Props = {
 
 export default function YoutubeEmbed({ videoId }: Props) {
   return (
-    <div style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
+    <div style={{ padding: '56.25% 0 0 0', position: 'relative', marginBottom: '2rem' }}>
       <LazyWrapper>
         <iframe
           src={`https://youtube.com/embed/${videoId}`}
