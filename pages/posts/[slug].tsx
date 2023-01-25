@@ -13,7 +13,7 @@ import PostTitle from '../../components/post-title'
 import PostType from '../../types/post'
 import GetRevueForm from '../../components/GetRevueForm'
 import PostImageHeader from '../../components/PostImageHeader'
-import SubstackForm from '../../components/SubstackForm'
+import SubstackCustomForm from '../../components/SubstackCustomForm'
 
 
 type Props = {
@@ -67,7 +67,8 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
             </>
           )}
           <div className="max-w-4xl mx-auto">
-            <GetRevueForm />
+            {/* <GetRevueForm /> */}
+            <SubstackCustomForm />
           </div>
         </Container>
       </div>
