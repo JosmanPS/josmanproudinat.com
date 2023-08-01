@@ -7,6 +7,7 @@ import { getAllPosts } from '../lib/api'
 import Head from 'next/head'
 import { CMS_NAME, HOME_OG_IMAGE_URL } from '../lib/constants'
 import Post from '../types/post'
+import MisionPosibleBanner from '../components/Books/MisionPosible/Banner'
 
 type Props = {
   allPosts: Post[]
@@ -23,6 +24,9 @@ const Index = ({ allPosts }: Props) => {
           <meta property="og:image" content={HOME_OG_IMAGE_URL} />
         </Head>
         <Intro />
+
+        <MisionPosibleBanner />
+
         <Container>
           <div id="ultimo-post"></div>
           {heroPost && (
