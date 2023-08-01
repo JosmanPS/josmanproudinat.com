@@ -4,7 +4,7 @@ import Container from '../../container'
 
 export default function MisionPosibleBanner() {
   return (
-    <section className="bg-neutral-200 py-24">
+    <section className="bg-neutral-200 dark:bg-neutral-800 py-24">
       <Container>
         <div className="flex flex-row justify-center align-middle gap-8">
           <div className="w-full">
@@ -16,9 +16,9 @@ export default function MisionPosibleBanner() {
               objectFit="contain"
             />
           </div>
-          <div className="prose prose-lg">
-            <h2>
-              <em>Misión Posible:</em> Evangeliza. Haz discípulos. Vive la
+          <div className="prose prose-lg dark:text-neutral-300">
+            <h2 className='dark:text-white'>
+              <em className='dark:text-yellow-500'>Misión Posible:</em> Evangeliza. Haz discípulos. Vive la
               misión de Jesús en tu día a día.
             </h2>
             <p>
