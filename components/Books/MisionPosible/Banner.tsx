@@ -46,7 +46,7 @@ export default function MisionPosibleBanner() {
 
             <div className='text-center lg:text-left'>
               <a
-                href="https://www.amazon.com/dp/B0C9G93N3S/"
+                href="https://www.amazon.com/dp/9997905652/"
                 target="_blank"
                 className="bg-yellow-400 hover:bg-yellow-500 border text-black font-bold py-4 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0"
               >
