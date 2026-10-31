@@ -38,7 +38,7 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
+  const post = await getPostBySlug(params.slug, [
     'title',
     'date',
     'slug',
@@ -49,26 +49,24 @@ export async function getStaticProps({ params }: Params) {
     'excerpt',
     'tags',
   ])
-  const {
-    content,
-    data: { title, description, date },
-  } = matter(post.content)
 
-  const source = await serialize(content)
+  if (!post || !post.slug) {
+    return {
+      notFound: true,
+      revalidate: 60,
+    }
+  }
 
   return {
     props: {
-      post: {
-        ...post,
-        content,
-      },
-      source,
+      post,
     },
+    revalidate: 3600,
   }
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug'])
+  const posts = await getAllPosts(['slug'])
 
   return {
     paths: posts.map((post) => {
@@ -78,6 +76,6 @@ export async function getStaticPaths() {
         },
       }
     }),
-    fallback: false,
+    fallback: 'blocking',
   }
 }

@@ -14,9 +14,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     }
   }
 
-  const posts = getAllPosts(['slug'])
+  const posts = await getAllPosts(['slug'])
 
-  const categories = getAllCategories()
+  const categories = await getAllCategories()
 
   // cache sitemap for up to one hour
   res.setHeader(

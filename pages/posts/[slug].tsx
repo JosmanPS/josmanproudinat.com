@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import ErrorPage from 'next/error'
-import matter from 'gray-matter'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
-import { serialize } from 'next-mdx-remote/serialize'
 import Container from '../../components/container'
 import PostBody from '../../components/post-body'
 import PostHeader from '../../components/post-header'
@@ -11,30 +9,27 @@ import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
 import PostType from '../../types/post'
-import GetRevueForm from '../../components/GetRevueForm'
 import PostImageHeader from '../../components/PostImageHeader'
 import SubstackCustomForm from '../../components/SubstackCustomForm'
 
 
 type Props = {
   post: PostType
-  morePosts: PostType[]
+  morePosts?: PostType[]
   preview?: boolean
-  source: MDXRemoteSerializeResult
+  source?: MDXRemoteSerializeResult
 }
 
-const Post = ({ post, morePosts, preview, source }: Props) => {
+const Post = ({ post, preview, source }: Props) => {
   const router = useRouter()
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
 
-  // const { imageURL } = useOpenGraphImage()
-
   return (
     <Layout preview={preview}>
       <div className="pb-8">
-        <PostImageHeader post={post} />
+        {post && <PostImageHeader post={post} />}
         <Container>
           {router.isFallback ? (
             <PostTitle>Loading…</PostTitle>
@@ -67,7 +62,6 @@ const Post = ({ post, morePosts, preview, source }: Props) => {
             </>
           )}
           <div className="max-w-4xl mx-auto">
-            {/* <GetRevueForm /> */}
             <SubstackCustomForm />
           </div>
         </Container>
@@ -85,7 +79,7 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
+  const post = await getPostBySlug(params.slug, [
     'title',
     'date',
     'slug',
@@ -96,26 +90,24 @@ export async function getStaticProps({ params }: Params) {
     'excerpt',
     'tags',
   ])
-  const {
-    content,
-    data: { title, description, date },
-  } = matter(post.content)
 
-  const source = await serialize(content)
+  if (!post || !post.slug) {
+    return {
+      notFound: true,
+      revalidate: 60,
+    }
+  }
 
   return {
     props: {
-      post: {
-        ...post,
-        content,
-      },
-      source,
+      post,
     },
+    revalidate: 3600,
   }
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug'])
+  const posts = await getAllPosts(['slug'])
 
   return {
     paths: posts.map((post) => {
@@ -125,6 +117,6 @@ export async function getStaticPaths() {
         },
       }
     }),
-    fallback: false,
+    fallback: 'blocking',
   }
 }

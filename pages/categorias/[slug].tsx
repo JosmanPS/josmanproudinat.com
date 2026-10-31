@@ -47,21 +47,28 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const category = getCategoryBySlug(params.slug)
-  const posts = getPostsByCategory((category as Category).name)
+  const category = await getCategoryBySlug(params.slug)
+  if (!category) {
+    return {
+      notFound: true,
+      revalidate: 60,
+    }
+  }
+  const posts = await getPostsByCategory(category.name)
   return {
     props: { posts, category },
+    revalidate: 3600,
   }
 }
 
 export async function getStaticPaths() {
-  const categories = getAllCategories()
+  const categories = await getAllCategories()
   return {
     paths: categories.map((category) => ({
       params: {
         slug: category.slug,
       },
     })),
-    fallback: false,
+    fallback: 'blocking',
   }
 }

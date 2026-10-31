@@ -21,3 +21,48 @@ input::placeholder {
 textarea {
   @apply dark:bg-neutral-600
 }
+
+/* Substack RSS Content Styles */
+.substack-content .button-wrapper {
+  @apply my-8 text-center;
+}
+
+.substack-content .button-wrapper a.button {
+  @apply btn-primary no-underline inline-block;
+}
+
+.substack-content .captioned-image-container figure {
+  @apply my-8;
+}
+
+.substack-content .captioned-image-container img {
+  @apply mx-auto rounded;
+}
+
+.substack-content .captioned-image-container figcaption {
+  @apply text-center text-sm text-neutral-500 dark:text-neutral-400 mt-2;
+}
+
+.substack-content .youtube-inner {
+  @apply relative w-full aspect-video my-8;
+}
+
+.substack-content .youtube-inner iframe {
+  @apply w-full h-full rounded;
+}
+
+.substack-content .footnote-anchor {
+  @apply text-xs align-super ml-0.5 no-underline font-semibold;
+}
+
+.substack-content .footnote {
+  @apply flex flex-row items-baseline gap-3 text-sm border-t border-neutral-200 dark:border-neutral-700 pt-3 mt-4;
+}
+
+.substack-content .footnote-number {
+  @apply font-bold no-underline;
+}
+
+.substack-content .footnote-content p {
+  @apply my-0;
+}

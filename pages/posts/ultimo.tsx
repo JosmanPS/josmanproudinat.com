@@ -9,14 +9,15 @@ export default function ultimo() {
 
 
 export async function getServerSideProps() {
-  const allPosts = getAllPosts([
+  const allPosts = await getAllPosts([
     'slug',
     'date',
   ])
   const lastPost = allPosts[0]
   return {
     redirect: {
-      destination: `/posts/${lastPost.slug}`
+      destination: `/posts/${lastPost.slug}`,
+      permanent: false,
     }
   }
 }

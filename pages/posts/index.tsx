@@ -19,10 +19,10 @@ export default function Posts({ posts }: Props) {
   return (
     <Layout>
       <Head>
-        <title>Categorias | Josman Proudinat</title>
+        <title>Posts | Josman Proudinat</title>
       </Head>
       <section>
-        <PostImageHeader post={posts[0]} />
+        {posts[0] && <PostImageHeader post={posts[0]} />}
         <Container>
           <div className='py-8'>
             <PostTitle>Posts</PostTitle>
@@ -35,7 +35,7 @@ export default function Posts({ posts }: Props) {
 }
 
 export async function getStaticProps() {
-  const posts = getAllPosts([
+  const posts = await getAllPosts([
     'title',
     'date',
     'slug',
@@ -49,5 +49,6 @@ export async function getStaticProps() {
     props: {
       posts,
     },
+    revalidate: 3600,
   }
 }

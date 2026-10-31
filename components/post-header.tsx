@@ -15,7 +15,13 @@ type Props = {
 }
 
 const PostHeader = ({ title, tags, date, content }: Props) => {
-  const tagsList = tags.trim().split(',')
+  const tagsList = tags
+    ? tags
+        .trim()
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean)
+    : []
   const tagsSlugs = tagsList.map((tag) =>
     slugify(tag, { trim: true, lower: true })
   )
@@ -24,15 +30,17 @@ const PostHeader = ({ title, tags, date, content }: Props) => {
     <>
       <div className="max-w-4xl mx-auto">
         <PostTitle>{title}</PostTitle>
-        <div className="mb-2 md:text-lg text-slate-500 flex flex-row">
+        <div className="mb-6 md:text-lg text-slate-500 flex flex-row">
           <DateFormatter dateString={date} /> <span className="mx-2">•</span>{' '}
           <ReadingTime content={content} />
         </div>
-        <div className="mb-6 md:text-lg text-slate-500 flex flex-row">
-          {tagsSlugs.map((tag) => (
-            <Tag slug={tag} />
-          ))}
-        </div>
+        {tagsSlugs.length > 0 && (
+          <div className="mb-6 md:text-lg text-slate-500 flex flex-row">
+            {tagsSlugs.map((tag) => (
+              <Tag key={tag} slug={tag} />
+            ))}
+          </div>
+        )}
       </div>
     </>
   )

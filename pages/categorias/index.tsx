@@ -35,11 +35,12 @@ export default function categorias({ categories }: Props) {
 }
 
 export async function getStaticProps() {
-  const categories = getAllCategories()
+  const categories = await getAllCategories()
 
   return {
     props: {
       categories,
     },
+    revalidate: 3600,
   }
 }

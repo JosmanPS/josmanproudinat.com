@@ -36,7 +36,6 @@ const Header = ({ dark }: Props) => {
 
   const links = [
     { text: 'Posts', href: '/posts' },
-    { text: 'Categorías', href: '/categorias' },
     { text: 'Contacto', href: '/contacto' },
   ]
 
