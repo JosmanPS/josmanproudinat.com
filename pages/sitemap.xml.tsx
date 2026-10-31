@@ -47,6 +47,10 @@ const createSitemap = (
       </url>
 
       <url>
+        <loc>${host}/predicaciones</loc>
+      </url>
+
+      <url>
         <loc>${host}/categorias</loc>
       </url>
 

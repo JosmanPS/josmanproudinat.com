@@ -5,6 +5,7 @@ module.exports = {
       'images.pexels.com',
       'substack-post-media.s3.amazonaws.com',
       'substackcdn.com',
+      'i.ytimg.com',
     ],
   },
 }

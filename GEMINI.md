@@ -50,12 +50,14 @@ npm run typecheck  # Ejecuta verificación de tipos con TypeScript (tsc)
 │   └── YoutubeEmbed/       # Componente para incrustar videos de YouTube en MDX
 ├── hooks/                  # Custom hooks (useCurrentTheme, useOpenGraphImage)
 ├── lib/                    # Lógica de acceso a datos y configuración
-│   ├── api.ts              # Lectura del sistema de archivos (_posts), filtros y categorías
+│   ├── api.ts              # Consumo del feed RSS de Substack y obtención de posts
+│   ├── youtube.ts          # Obtención de predicaciones desde playlist de YouTube
 │   ├── config.ts           # Dominio, puerto y construcción de URLs absolutas
 │   ├── constants.ts        # Constantes globales y OG image por defecto
 │   └── markdownToHtml.ts   # Conversión auxiliar con remark / remark-html
 ├── pages/                  # Rutas de Next.js (Pages Router)
 │   ├── index.tsx           # Inicio: Intro, banner de libro, HeroPost y MoreStories
+│   ├── predicaciones/      # Listado y reproductor de predicaciones de YouTube (/predicaciones)
 │   ├── categorias/         # Índice de categorías (/categorias) y vista por categoría (/categorias/[slug])
 │   ├── contacto/           # Página de contacto (/contacto)
 │   ├── posts/              # Listado (/posts), artículo (/posts/[slug]), redirección (/posts/ultimo) y vista OG
