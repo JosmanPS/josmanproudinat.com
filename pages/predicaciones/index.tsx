@@ -219,7 +219,7 @@ export default function Predicaciones({ sermons }: Props) {
                               quality={90}
                               className="group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                             />
-                            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors flex items-center justify-center">
+                            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                               <div className="w-14 h-14 rounded-full bg-black/80 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
                                 <svg
                                   className="w-6 h-6 ml-0.5"
@@ -232,7 +232,7 @@ export default function Predicaciones({ sermons }: Props) {
                               </div>
                             </div>
                             {sermon.duration && (
-                              <span className="absolute bottom-2 right-2 bg-black/85 text-white text-xs font-semibold px-2 py-0.5 rounded">
+                              <span className="absolute bottom-2 right-2 bg-black/80 text-white text-xs font-semibold px-2 py-0.5 rounded">
                                 {sermon.duration}
                               </span>
                             )}

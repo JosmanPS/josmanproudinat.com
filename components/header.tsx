@@ -48,7 +48,7 @@ const Header = ({ dark }: Props) => {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-200/80 dark:border-neutral-800/80 bg-white/85 dark:bg-neutral-900/85 backdrop-blur-md transition-colors">
+    <header className="sticky top-0 z-50 border-b border-neutral-200/80 dark:border-neutral-800/80 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md shadow-sm transition-colors">
       <Container>
         <div className="flex flex-wrap justify-between items-center py-4">
           <BrandName />

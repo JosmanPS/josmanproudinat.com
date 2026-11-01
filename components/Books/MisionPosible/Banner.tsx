@@ -19,7 +19,7 @@ export default function MisionPosibleBanner() {
           </div>
 
           <div className="lg:col-span-7 text-center lg:text-left">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-100 text-amber-900 dark:bg-amber-500/15 dark:text-amber-300 mb-4">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-100 text-amber-900 dark:bg-amber-500/20 dark:text-amber-300 mb-4">
               Libro Disponible
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight text-neutral-900 dark:text-white mb-4">
