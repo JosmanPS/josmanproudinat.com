@@ -5,15 +5,15 @@ import NextImage from 'next/image'
 const Intro = () => {
   return (
     <section
-      className="relative overflow-hidden bg-neutral-900 text-white pt-16 pb-0 md:py-24 lg:py-28 border-b border-neutral-800"
+      className="relative overflow-hidden bg-neutral-900 text-white pt-16 md:pt-24 lg:pt-28 pb-0 border-b border-neutral-800"
       style={{
         background:
           'radial-gradient(circle at 80% 20%, rgba(64,64,64,0.35) 0%, rgba(10,10,10,1) 70%)',
       }}
     >
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-12 items-center gap-10">
-          <div className="md:col-span-7 z-10 text-center md:text-left pb-8 md:pb-0">
+        <div className="grid grid-cols-1 md:grid-cols-12 items-end gap-8">
+          <div className="md:col-span-7 z-10 text-center md:text-left pb-6 md:pb-24 lg:pb-28">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 border border-neutral-800 bg-neutral-900/80 rounded-full px-3.5 py-1 mb-6">
               Teología • Liderazgo • Misión
             </span>
@@ -30,7 +30,7 @@ const Intro = () => {
             <Buttons />
           </div>
 
-          <div className="md:col-span-5 relative h-72 sm:h-80 md:h-[440px] w-full">
+          <div className="md:col-span-5 self-end relative h-80 sm:h-96 md:h-[480px] lg:h-[520px] w-full leading-none">
             <NextImage
               priority
               src="/img/josman-sin-fondo.png"
