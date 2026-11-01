@@ -1,0 +1,40 @@
+name: Sincronizar Predicaciones de YouTube
+
+on:
+  schedule:
+    # Se ejecuta automáticamente cada 6 horas
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Permite ejecutarlo manualmente desde la pestaña Actions en GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  sync-sermons:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Detectar nuevos videos y generar artículos MDX con Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          YOUTUBE_PLAYLIST_ID: 'PLP-6xYOMaKCvhuE4QVTuhU0pWEYotCgQr'
+        run: node scripts/sync-predicaciones.mjs
+
+      - name: Hacer commit y push si hay nuevas predicaciones
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _predicaciones/
+          if git diff --staged --quiet; then
+            echo "No hay nuevas predicaciones para hacer commit."
+          else
+            git commit -m "chore(predicaciones): agregar nueva predicación desde YouTube"
+            git push
+          fi

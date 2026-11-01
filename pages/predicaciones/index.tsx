@@ -1,30 +1,56 @@
-import React, { useState } from 'react'
+import React, { useMemo } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import NextImage from 'next/image'
 import Container from '../../components/container'
 import Layout from '../../components/layout'
 import PostTitle from '../../components/post-title'
+import DateFormatter from '../../components/date-formatter'
+import ButtonPrimary from '../../components/ButtonPrimary'
 import Sermon from '../../types/sermon'
-import { getPlaylistSermons, YOUTUBE_PLAYLIST_URL } from '../../lib/youtube'
+import { getAllSermons } from '../../lib/youtube'
+import { YOUTUBE_PLAYLIST_URL } from '../../lib/constants'
 
 type Props = {
   sermons: Sermon[]
 }
 
-export default function Predicaciones({ sermons }: Props) {
-  const [activeSermon, setActiveSermon] = useState<Sermon | null>(
-    sermons[0] || null
-  )
-  const [autoPlay, setAutoPlay] = useState(false)
+function parseTags(tagsStr = ''): string[] {
+  return tagsStr
+    .split(',')
+    .map((t) => t.trim())
+    .filter(Boolean)
+}
 
-  const handleSelectSermon = (sermon: Sermon) => {
-    setActiveSermon(sermon)
-    setAutoPlay(true)
-    const playerEl = document.getElementById('reproductor-predicacion')
-    if (playerEl) {
-      playerEl.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }
+export default function Predicaciones({ sermons }: Props) {
+  const router = useRouter()
+  const activeTag =
+    typeof router.query.tag === 'string' ? router.query.tag : ''
+
+  const allTags = useMemo(() => {
+    const counts: { [key: string]: number } = {}
+    sermons.forEach((s) => {
+      parseTags(s.tags).forEach((t) => {
+        counts[t] = (counts[t] || 0) + 1
+      })
+    })
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([name]) => name)
+  }, [sermons])
+
+  const filteredSermons = useMemo(() => {
+    if (!activeTag) return sermons
+    return sermons.filter((s) =>
+      parseTags(s.tags).some(
+        (t) => t.toLowerCase() === activeTag.toLowerCase()
+      )
+    )
+  }, [sermons, activeTag])
+
+  const featuredSermon = !activeTag ? sermons[0] || null : null
+  const gridSermons = !activeTag ? sermons.slice(1) : filteredSermons
 
   return (
     <Layout>
@@ -32,15 +58,15 @@ export default function Predicaciones({ sermons }: Props) {
         <title>Predicaciones | Josman Proudinat</title>
         <meta
           name="description"
-          content="Predicaciones y enseñanzas en video de Josman Proudinat."
+          content="Predicaciones, enseñanzas en video y notas de estudio de Josman Proudinat."
         />
       </Head>
       <Container>
         <section className="py-8">
           <PostTitle>Predicaciones</PostTitle>
-          <p className="text-lg mt-2 mb-8 leading-relaxed dark:text-neutral-400">
-            Explora y escucha las predicaciones más recientes directamente aquí
-            o en{' '}
+          <p className="text-lg mt-2 mb-6 leading-relaxed dark:text-neutral-400">
+            Mira cada predicación junto con su resumen y notas de estudio, o
+            explora la lista completa en{' '}
             <a
               href={YOUTUBE_PLAYLIST_URL}
               target="_blank"
@@ -52,137 +78,209 @@ export default function Predicaciones({ sermons }: Props) {
             .
           </p>
 
-          {activeSermon && (
-            <div
-              id="reproductor-predicacion"
-              className="mb-16 scroll-mt-28 bg-neutral-50 border border-neutral-200 dark:bg-neutral-800 dark:border-neutral-700 p-4 md:p-8"
-            >
-              <div className="w-full aspect-video relative bg-black mb-6">
-                <iframe
-                  key={`${activeSermon.videoId}-${autoPlay ? 'play' : 'init'}`}
-                  src={`https://www.youtube.com/embed/${activeSermon.videoId}?rel=0${
-                    autoPlay ? '&autoplay=1' : ''
+          {allTags.length > 0 && (
+            <div className="mb-10 flex flex-wrap items-center gap-2">
+              <Link href="/predicaciones" scroll={false}>
+                <a
+                  className={`text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-colors ${
+                    !activeTag
+                      ? 'bg-black text-white border-black dark:bg-white dark:text-black dark:border-white'
+                      : 'bg-transparent text-neutral-600 border-neutral-300 hover:border-black dark:text-neutral-300 dark:border-neutral-700 dark:hover:border-white'
                   }`}
-                  title={activeSermon.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="w-full h-full absolute inset-0"
-                />
-              </div>
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                  <span className="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 mb-2 bg-black text-white dark:bg-white dark:text-black">
-                    Reproduciendo
-                  </span>
-                  <h2 className="text-2xl md:text-3xl font-bold leading-snug">
-                    {activeSermon.title}
-                  </h2>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                    {[
-                      activeSermon.channel,
-                      activeSermon.duration &&
-                        `Duración: ${activeSermon.duration}`,
-                    ]
-                      .filter(Boolean)
-                      .join(' • ')}
-                  </p>
-                </div>
-                <div className="shrink-0">
-                  <a
-                    href={activeSermon.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary-outline inline-block text-sm py-2.5 px-6"
+                >
+                  Todas ({sermons.length})
+                </a>
+              </Link>
+              {allTags.map((tag) => {
+                const isSelected =
+                  activeTag.toLowerCase() === tag.toLowerCase()
+                return (
+                  <Link
+                    key={tag}
+                    href={
+                      isSelected
+                        ? '/predicaciones'
+                        : `/predicaciones?tag=${encodeURIComponent(tag)}`
+                    }
+                    scroll={false}
                   >
-                    Ver en YouTube ↗
-                  </a>
+                    <a
+                      className={`text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-colors ${
+                        isSelected
+                          ? 'bg-black text-white border-black dark:bg-white dark:text-black dark:border-white'
+                          : 'bg-transparent text-neutral-600 border-neutral-300 hover:border-black dark:text-neutral-300 dark:border-neutral-700 dark:hover:border-white'
+                      }`}
+                    >
+                      #{tag}
+                    </a>
+                  </Link>
+                )
+              })}
+            </div>
+          )}
+
+          {featuredSermon && (
+            <div className="mb-16 bg-neutral-50 border border-neutral-200 dark:bg-neutral-800 dark:border-neutral-700 p-4 md:p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-8 items-center">
+                <div className="w-full aspect-video relative bg-black mb-6 lg:mb-0">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${featuredSermon.videoId}?rel=0`}
+                    title={featuredSermon.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="w-full h-full absolute inset-0"
+                  />
+                </div>
+                <div>
+                  <span className="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 mb-3 bg-black text-white dark:bg-white dark:text-black">
+                    Predicación más reciente
+                  </span>
+                  <h2 className="text-2xl md:text-3xl font-bold leading-snug mb-3">
+                    <Link
+                      as={`/predicaciones/${featuredSermon.slug}`}
+                      href="/predicaciones/[slug]"
+                    >
+                      <a className="hover:underline">{featuredSermon.title}</a>
+                    </Link>
+                  </h2>
+                  <div className="text-sm text-neutral-500 dark:text-neutral-400 mb-3 flex flex-wrap items-center">
+                    {featuredSermon.date && (
+                      <>
+                        <DateFormatter dateString={featuredSermon.date} />
+                        <span className="mx-2">•</span>
+                      </>
+                    )}
+                    <span>
+                      {[
+                        featuredSermon.channel,
+                        featuredSermon.duration &&
+                          `Duración: ${featuredSermon.duration}`,
+                      ]
+                        .filter(Boolean)
+                        .join(' • ')}
+                    </span>
+                  </div>
+                  {featuredSermon.tags && (
+                    <div className="mb-4 flex flex-wrap gap-1.5">
+                      {parseTags(featuredSermon.tags).map((tag) => (
+                        <Link
+                          key={tag}
+                          href={`/predicaciones?tag=${encodeURIComponent(tag)}`}
+                          scroll={false}
+                        >
+                          <a className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-neutral-200/80 text-neutral-700 hover:bg-black hover:text-white dark:bg-neutral-700 dark:text-neutral-200 dark:hover:bg-white dark:hover:text-black transition-colors">
+                            #{tag}
+                          </a>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                  <p className="text-base leading-relaxed mb-6 dark:text-neutral-300">
+                    {featuredSermon.excerpt}
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <ButtonPrimary
+                      href={`/predicaciones/${featuredSermon.slug}`}
+                    >
+                      Leer artículo y ver predicación
+                    </ButtonPrimary>
+                  </div>
                 </div>
               </div>
             </div>
           )}
 
-          <h2 className="mb-8 text-3xl md:text-4xl font-bold tracking-tighter leading-tight">
-            Todas las predicaciones ({sermons.length})
-          </h2>
+          {gridSermons.length > 0 && (
+            <>
+              <h2 className="mb-8 text-3xl md:text-4xl font-bold tracking-tighter leading-tight">
+                {activeTag
+                  ? `Predicaciones sobre #${activeTag} (${gridSermons.length})`
+                  : 'Más predicaciones'}
+              </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14 mb-24">
-            {sermons.map((sermon) => {
-              const isSelected = activeSermon?.videoId === sermon.videoId
-              return (
-                <div
-                  key={sermon.videoId}
-                  className="flex flex-col justify-between group"
-                >
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => handleSelectSermon(sermon)}
-                      className="w-full text-left focus:outline-none"
-                    >
-                      <div
-                        className={`w-full aspect-video relative mb-4 overflow-hidden transition-shadow duration-200 group-hover:shadow-lg ${
-                          isSelected
-                            ? 'ring-4 ring-black dark:ring-white'
-                            : ''
-                        }`}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14 mb-24">
+                {gridSermons.map((sermon) => (
+                  <div
+                    key={sermon.slug}
+                    className="flex flex-col justify-between group"
+                  >
+                    <div>
+                      <Link
+                        as={`/predicaciones/${sermon.slug}`}
+                        href="/predicaciones/[slug]"
                       >
-                        <NextImage
-                          src={sermon.thumbnail}
-                          alt={sermon.title}
-                          layout="fill"
-                          objectFit="cover"
-                          quality={90}
-                        />
-                        <div className="absolute inset-0 bg-black/25 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                          <div className="w-14 h-14 rounded-full bg-black/80 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <svg
-                              className="w-6 h-6 ml-0.5"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                            </svg>
+                        <a className="block focus:outline-none">
+                          <div className="w-full aspect-video relative mb-4 overflow-hidden transition-shadow duration-200 group-hover:shadow-lg">
+                            <NextImage
+                              src={sermon.thumbnail}
+                              alt={sermon.title}
+                              layout="fill"
+                              objectFit="cover"
+                              quality={90}
+                            />
+                            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors flex items-center justify-center">
+                              <div className="w-14 h-14 rounded-full bg-black/80 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <svg
+                                  className="w-6 h-6 ml-0.5"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                                </svg>
+                              </div>
+                            </div>
+                            {sermon.duration && (
+                              <span className="absolute bottom-2 right-2 bg-black/85 text-white text-xs font-semibold px-2 py-0.5 rounded">
+                                {sermon.duration}
+                              </span>
+                            )}
                           </div>
-                        </div>
-                        {sermon.duration && (
-                          <span className="absolute bottom-2 right-2 bg-black/85 text-white text-xs font-semibold px-2 py-0.5 rounded">
-                            {sermon.duration}
-                          </span>
+                          <h3 className="text-xl font-bold mb-2 leading-snug group-hover:underline">
+                            {sermon.title}
+                          </h3>
+                        </a>
+                      </Link>
+                      <div className="text-sm text-neutral-500 dark:text-neutral-400 mb-2 flex flex-wrap items-center">
+                        {sermon.date && (
+                          <>
+                            <DateFormatter dateString={sermon.date} />
+                            <span className="mx-2">•</span>
+                          </>
                         )}
-                        {isSelected && (
-                          <span className="absolute top-2 left-2 bg-black text-white dark:bg-white dark:text-black text-xs font-bold uppercase px-2.5 py-1">
-                            En reproducción
-                          </span>
-                        )}
+                        <span>{sermon.channel}</span>
                       </div>
-                      <h3 className="text-xl font-bold mb-2 leading-snug group-hover:underline">
-                        {sermon.title}
-                      </h3>
-                    </button>
-                    <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
-                      {[sermon.channel, sermon.publishedInfo]
-                        .filter(Boolean)
-                        .join(' • ')}
-                    </p>
+                      {sermon.tags && (
+                        <div className="mb-3 flex flex-wrap gap-1.5">
+                          {parseTags(sermon.tags).map((tag) => (
+                            <Link
+                              key={tag}
+                              href={`/predicaciones?tag=${encodeURIComponent(
+                                tag
+                              )}`}
+                              scroll={false}
+                            >
+                              <a className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-600 hover:bg-black hover:text-white dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-white dark:hover:text-black transition-colors">
+                                #{tag}
+                              </a>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                      <p className="text-base leading-relaxed mb-6 dark:text-neutral-400">
+                        {sermon.excerpt}
+                      </p>
+                    </div>
+                    <div>
+                      <ButtonPrimary href={`/predicaciones/${sermon.slug}`}>
+                        Ver predicación y notas
+                      </ButtonPrimary>
+                    </div>
                   </div>
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => handleSelectSermon(sermon)}
-                      className={
-                        isSelected
-                          ? 'btn-primary-outline w-full text-sm py-2.5 px-6'
-                          : 'btn-primary w-full text-sm py-2.5 px-6'
-                      }
-                    >
-                      {isSelected ? 'Reproduciendo ahora' : 'Ver predicación'}
-                    </button>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+                ))}
+              </div>
+            </>
+          )}
         </section>
       </Container>
     </Layout>
@@ -190,12 +288,23 @@ export default function Predicaciones({ sermons }: Props) {
 }
 
 export async function getStaticProps() {
-  const sermons = await getPlaylistSermons()
+  const sermons = getAllSermons([
+    'slug',
+    'videoId',
+    'title',
+    'date',
+    'duration',
+    'channel',
+    'publishedInfo',
+    'excerpt',
+    'tags',
+    'thumbnail',
+    'url',
+  ])
 
   return {
     props: {
       sermons,
     },
-    revalidate: 3600,
   }
 }

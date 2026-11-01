@@ -21,10 +21,11 @@ Blog personal y plataforma de enseñanzas/predicaciones de **Josman Proudinat** 
 ## Comandos de Desarrollo
 
 ```bash
-npm run dev        # Inicia el servidor de desarrollo en http://localhost:3000
-npm run build      # Compila la aplicación para producción
-npm run start      # Inicia el servidor de producción de Next.js
-npm run typecheck  # Ejecuta verificación de tipos con TypeScript (tsc)
+npm run dev                 # Inicia el servidor de desarrollo en http://localhost:3000
+npm run build               # Compila la aplicación para producción
+npm run start               # Inicia el servidor de producción de Next.js
+npm run typecheck           # Ejecuta verificación de tipos con TypeScript (tsc)
+npm run sync:predicaciones  # Detecta nuevos videos de YouTube y genera archivos .mdx en _predicaciones/ con Gemini API
 ```
 
 ---
@@ -32,7 +33,10 @@ npm run typecheck  # Ejecuta verificación de tipos con TypeScript (tsc)
 ## Estructura del Proyecto
 
 ```text
-├── _posts/                 # Artículos del blog en formato MDX (.mdx)
+├── .github/workflows/      # Automatización con GitHub Actions (sync-predicaciones.yml)
+├── _posts/                 # Artículos históricos del blog en formato MDX (.mdx)
+├── _predicaciones/         # Predicaciones de YouTube y notas de estudio en formato MDX (.mdx)
+├── scripts/                # Scripts de automatización (sync-predicaciones.mjs)
 ├── @types/                 # Declaraciones de tipos adicionales (ej. remark-html)
 ├── components/             # Componentes de interfaz y bloques personalizados MDX
 │   ├── Books/              # Banners promocionales de libros (ej. Misión Posible)

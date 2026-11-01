@@ -1,3 +1,6 @@
+import fs from 'fs'
+import { join } from 'path'
+import matter from 'gray-matter'
 import slugify from 'slugify'
 import Category from '../types/Category'
 import PostType from '../types/post'
@@ -58,20 +61,57 @@ function cleanSubstackContent(html = ''): string {
   )
 }
 
+function getLocalFallbackPosts(): PostType[] {
+  const postsDirectory = join(process.cwd(), '_posts')
+  if (!fs.existsSync(postsDirectory)) return []
+  const files = fs
+    .readdirSync(postsDirectory)
+    .filter((f) => f.endsWith('.mdx'))
+  return files
+    .map((file) => {
+      const realSlug = file.replace(/\.mdx$/, '')
+      const fullPath = join(postsDirectory, file)
+      const fileContents = fs.readFileSync(fullPath, 'utf8')
+      const { data, content } = matter(fileContents)
+      return {
+        slug: realSlug,
+        title: data.title || '',
+        date: data.date || '',
+        coverImage: data.coverImage || DEFAULT_COVER_IMAGE,
+        author: data.author || DEFAULT_AUTHOR,
+        excerpt: data.excerpt || '',
+        tags: data.tags || '',
+        ogImage: data.ogImage || {
+          url: data.coverImage || DEFAULT_COVER_IMAGE,
+        },
+        content,
+      }
+    })
+    .sort((p1, p2) => (p1.date > p2.date ? -1 : 1))
+}
+
 async function fetchFeedPosts(): Promise<PostType[]> {
   const now = Date.now()
   if (cachedPosts && now - cacheTimestamp < CACHE_TTL_MS) {
     return cachedPosts
   }
 
-  const response = await fetch(SUBSTACK_FEED_URL)
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch Substack RSS feed (${response.status} ${response.statusText})`
-    )
+  let xml = ''
+  try {
+    const response = await fetch(SUBSTACK_FEED_URL)
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch Substack RSS feed (${response.status} ${response.statusText})`
+      )
+    }
+    xml = await response.text()
+    if (!xml.includes('<rss')) {
+      throw new Error('Invalid RSS feed response')
+    }
+  } catch {
+    return getLocalFallbackPosts()
   }
 
-  const xml = await response.text()
   const items = xml.split('<item>').slice(1)
 
   const posts: PostType[] = items

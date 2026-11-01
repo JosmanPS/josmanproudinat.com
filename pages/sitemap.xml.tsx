@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse, GetServerSideProps } from 'next'
 import { host } from '../lib/config'
 import { getAllCategories, getAllPosts } from '../lib/api'
+import { getAllSermons } from '../lib/youtube'
 import Category from '../types/Category'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
@@ -15,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   }
 
   const posts = await getAllPosts(['slug'])
-
+  const sermons = getAllSermons(['slug'])
   const categories = await getAllCategories()
 
   // cache sitemap for up to one hour
@@ -25,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   )
   res.setHeader('Content-Type', 'text/xml')
 
-  res.write(createSitemap(posts, categories))
+  res.write(createSitemap(posts, sermons, categories))
   res.end()
 
   return {
@@ -35,6 +36,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
 const createSitemap = (
   posts: any[],
+  sermons: any[],
   categories: Category[]
 ) => `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -50,9 +52,15 @@ const createSitemap = (
         <loc>${host}/predicaciones</loc>
       </url>
 
-      <url>
-        <loc>${host}/categorias</loc>
-      </url>
+      ${sermons
+        .map((sermon) =>
+          `
+            <url>
+              <loc>${host}/predicaciones/${sermon.slug}</loc>
+            </url>
+          `.trim()
+        )
+        .join('')}
 
       ${categories
         .map((category) =>
