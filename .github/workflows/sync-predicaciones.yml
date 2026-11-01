@@ -2,8 +2,8 @@ name: Sincronizar Predicaciones de YouTube
 
 on:
   schedule:
-    # Se ejecuta automáticamente cada 6 horas
-    - cron: '0 */6 * * *'
+    # Se ejecuta automáticamente una vez por semana (todos los lunes a las 12:00 UTC / 6:00 AM CST)
+    - cron: '0 12 * * 1'
   workflow_dispatch: # Permite ejecutarlo manualmente desde la pestaña Actions en GitHub
 
 permissions:
