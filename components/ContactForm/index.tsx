@@ -7,38 +7,52 @@ export default function ContactForm() {
 
   return (
     <>
-      {state.succeeded && <Alert type="success">
-        ✅ Tu mensaje ha sido enviado. Pronto me pondré en contacto contigo 😁.
-      </Alert>}
-      <div className="bg-neutral-50 border border-neutral-200 dark:bg-neutral-800 dark:border-neutral-600 py-8 px-6 mb-8">
-        <form onSubmit={handleSubmit}>
+      {state.succeeded && (
+        <Alert type="success">
+          ✅ Tu mensaje ha sido enviado. Pronto me pondré en contacto contigo.
+        </Alert>
+      )}
+      <div className="rounded-2xl bg-neutral-50 border border-neutral-200/80 dark:bg-neutral-900 dark:border-neutral-800 p-8 md:p-10 mb-12 shadow-sm">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <input
             type="hidden"
             name="_subject"
             value="Nuevo contacto desde josmanproudinat.com"
           />
-          <div className="mb-4">
-            <label htmlFor="name">Nombre:</label>
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-2"
+            >
+              Nombre
+            </label>
             <input
               id="name"
               type="text"
               name="name"
-              className="w-full rounded"
+              placeholder="Tu nombre completo"
+              className="w-full rounded-lg border-neutral-300 focus:border-black focus:ring-black dark:border-neutral-700 dark:focus:border-white dark:focus:ring-white py-3 px-4"
               required
             />
             <ValidationError
-              prefix="Email"
-              field="email"
+              prefix="Nombre"
+              field="name"
               errors={state.errors}
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="email">Email:</label>
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-2"
+            >
+              Correo electrónico
+            </label>
             <input
               id="email"
               type="email"
               name="_replyto"
-              className="w-full rounded"
+              placeholder="tu@correo.com"
+              className="w-full rounded-lg border-neutral-300 focus:border-black focus:ring-black dark:border-neutral-700 dark:focus:border-white dark:focus:ring-white py-3 px-4"
               required
             />
             <ValidationError
@@ -47,12 +61,19 @@ export default function ContactForm() {
               errors={state.errors}
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="message">Mensaje:</label>
+          <div>
+            <label
+              htmlFor="message"
+              className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-2"
+            >
+              Mensaje
+            </label>
             <textarea
               id="message"
               name="message"
-              className="w-full rounded"
+              rows={5}
+              placeholder="¿En qué puedo ayudarte?"
+              className="w-full rounded-lg border-neutral-300 focus:border-black focus:ring-black dark:border-neutral-700 dark:focus:border-white dark:focus:ring-white py-3 px-4"
               required
             />
             <ValidationError
@@ -63,10 +84,10 @@ export default function ContactForm() {
           </div>
           <button
             type="submit"
-            className="btn-primary w-full rounded"
+            className="btn-primary w-full py-3.5"
             disabled={state.submitting}
           >
-            Enviar
+            {state.submitting ? 'Enviando…' : 'Enviar mensaje'}
           </button>
         </form>
       </div>

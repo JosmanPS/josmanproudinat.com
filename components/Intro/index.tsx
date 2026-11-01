@@ -1,4 +1,3 @@
-import { CMS_NAME } from '../../lib/constants'
 import Container from '../container'
 import Buttons from './buttons'
 import NextImage from 'next/image'
@@ -6,43 +5,44 @@ import NextImage from 'next/image'
 const Intro = () => {
   return (
     <section
-      className="flex flex-col-reverse md:flex-row items-center md:justify-between md:min-h-[650px] py-36 relative -z-20"
+      className="relative overflow-hidden bg-neutral-900 text-white pt-16 pb-0 md:py-24 lg:py-28 border-b border-neutral-800"
       style={{
         background:
-          'linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(141,140,145,1) 100%)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
+          'radial-gradient(circle at 80% 20%, rgba(64,64,64,0.35) 0%, rgba(10,10,10,1) 70%)',
       }}
     >
       <Container>
-        <div className="max-w-2xl">
-          <h1 className="text-white text-center md:text-left text-2xl md:text-4xl font-bold leading-tight md:pr-8">
-            Hola, soy Josman Proudinat
-          </h1>
-          <p className="text-neutral-300 text-center md:text-left text-lg mt-5 leading-10 mb-12">
-            He creado este espacio para compartir mis notas, predicaciones y
-            enseñanzas.<br />
-            <b>
-              Mi meta es poder ayudarte a cumplir la misión de Jesús para tu
-              vida.
-            </b>{' '}
-          </p>
-          <div className="mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 items-center gap-10">
+          <div className="md:col-span-7 z-10 text-center md:text-left pb-8 md:pb-0">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-neutral-400 border border-neutral-800 bg-neutral-900/80 rounded-full px-3.5 py-1 mb-6">
+              Teología • Liderazgo • Misión
+            </span>
+            <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12] mb-6">
+              Hola, soy Josman Proudinat.
+            </h1>
+            <p className="text-neutral-300 text-lg md:text-xl leading-relaxed mb-4 max-w-xl mx-auto md:mx-0">
+              He creado este espacio para compartir mis artículos, predicaciones
+              y notas de enseñanza bíblica.
+            </p>
+            <p className="text-white font-semibold text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto md:mx-0">
+              Mi meta es ayudarte a cumplir la misión de Jesús para tu vida.
+            </p>
             <Buttons />
+          </div>
+
+          <div className="md:col-span-5 relative h-72 sm:h-80 md:h-[440px] w-full">
+            <NextImage
+              priority
+              src="/img/josman-sin-fondo.png"
+              alt="Josman Proudinat"
+              layout="fill"
+              objectFit="contain"
+              objectPosition="center bottom"
+              quality={100}
+            />
           </div>
         </div>
       </Container>
-      <div className="absolute w-full h-full bottom-0 right-0 md:right-48 overflow-hidden" style={{}}>
-        <NextImage
-          className="-z-10"
-          src="/img/josman-sin-fondo.png"
-          alt="Josman Proudinat"
-          layout="fill"
-          objectFit="contain"
-          objectPosition="right bottom"
-          quality={100}
-        />
-      </div>
     </section>
   )
 }

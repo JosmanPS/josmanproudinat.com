@@ -4,17 +4,16 @@ import useCurrentTheme from '../../hooks/useCurrentTheme'
 
 export default function DarkModeSwitch() {
   const [currentTheme, setTheme] = useCurrentTheme()
+  const isDark = currentTheme === 'dark'
 
   return (
     <button
       type="button"
-      className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      aria-label="Cambiar tema de color"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      className="inline-flex items-center justify-center w-9 h-9 text-sm text-neutral-600 rounded-lg border border-transparent hover:border-neutral-200 hover:bg-neutral-100 focus:outline-none dark:text-neutral-300 dark:hover:border-neutral-800 dark:hover:bg-neutral-800/80 transition-colors"
     >
-      {currentTheme === 'dark' ? (
-        <FaMoon onClick={() => setTheme('light')} />
-      ) : (
-        <FaSun onClick={() => setTheme('dark')} />
-      )}
+      {isDark ? <FaSun className="w-4 h-4" /> : <FaMoon className="w-4 h-4" />}
     </button>
   )
 }

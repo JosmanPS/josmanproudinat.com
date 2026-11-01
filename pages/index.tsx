@@ -4,10 +4,11 @@ import HeroPost from '../components/hero-post'
 import LatestSermon from '../components/latest-sermon'
 import Intro from '../components/Intro'
 import Layout from '../components/layout'
+import SubstackCustomForm from '../components/SubstackCustomForm'
 import { getAllPosts } from '../lib/api'
 import { getPlaylistSermons } from '../lib/youtube'
 import Head from 'next/head'
-import { CMS_NAME, HOME_OG_IMAGE_URL } from '../lib/constants'
+import { HOME_OG_IMAGE_URL } from '../lib/constants'
 import Post from '../types/post'
 import Sermon from '../types/sermon'
 import MisionPosibleBanner from '../components/Books/MisionPosible/Banner'
@@ -22,7 +23,7 @@ const Index = ({ allPosts, latestSermon }: Props) => {
   const morePosts = allPosts.slice(1)
   return (
     <>
-      <Layout headerDark>
+      <Layout>
         <Head>
           <title>Josman Proudinat</title>
           <meta property="og:image" content={HOME_OG_IMAGE_URL} />
@@ -46,6 +47,10 @@ const Index = ({ allPosts, latestSermon }: Props) => {
           )}
           {latestSermon && <LatestSermon sermon={latestSermon} />}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+
+          <div className="max-w-4xl mx-auto pb-8">
+            <SubstackCustomForm />
+          </div>
         </Container>
       </Layout>
     </>

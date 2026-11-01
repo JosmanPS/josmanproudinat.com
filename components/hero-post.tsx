@@ -19,30 +19,52 @@ const HeroPost = ({
   coverImage,
   date,
   excerpt,
-  author,
   slug,
   ogImage,
 }: Props) => {
   return (
-    <section className="py-16">
-      <h2 className="mb-8 text-3xl md:text-4xl font-bold tracking-tighter leading-tight">
-        Último post
-      </h2>
-      <div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-8">
-          <CoverImage title={title} src={ogImage?.url || coverImage} slug={slug} />
+    <section className="py-20">
+      <div className="flex items-center justify-between mb-10">
+        <div>
+          <span className="block text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-1.5">
+            Publicación Destacada
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
+            Último post
+          </h2>
+        </div>
+        <Link href="/posts">
+          <a className="hidden sm:inline-flex items-center text-sm font-semibold text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">
+            Ver todos los posts →
+          </a>
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="lg:col-span-7">
+          <CoverImage
+            title={title}
+            src={ogImage?.url || coverImage}
+            slug={slug}
+          />
+        </div>
+        <div className="lg:col-span-5">
+          <div className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-3">
+            <DateFormatter dateString={date} />
+          </div>
+          <h3 className="mb-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-snug">
+            <Link as={`/posts/${slug}`} href="/posts/[slug]">
+              <a className="hover:underline decoration-2 underline-offset-4">
+                {title}
+              </a>
+            </Link>
+          </h3>
+          <p className="text-base md:text-lg leading-relaxed mb-8 text-neutral-600 dark:text-neutral-400">
+            {excerpt}
+          </p>
           <div>
-            <h3 className="mb-4 mt-8 lg:mt-0 text-4xl lg:text-5xl leading-tight">
-              <Link as={`/posts/${slug}`} href="/posts/[slug]">
-                <a className="hover:underline">{title}</a>
-              </Link>
-            </h3>
-            <div className="text-lg mb-4">
-              <DateFormatter dateString={date} />
-            </div>
-            <p className="text-lg leading-relaxed mb-8 dark:text-neutral-400">{excerpt}</p>
             <ButtonPrimary href={`/posts/${slug}`}>
-              Leer post
+              Leer artículo →
             </ButtonPrimary>
           </div>
         </div>

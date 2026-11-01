@@ -1,22 +1,25 @@
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import useCurrentTheme from '../hooks/useCurrentTheme'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 import BrandName from './BrandName'
 import Container from './container'
 import DarkModeSwitch from './DarkModeSwitch'
 
 type HeaderLinkProps = {
-  children: any
+  children: React.ReactNode
   href: string
-  white?: boolean
+  active?: boolean
 }
 
-const HeaderLink = ({ children, href, white }: HeaderLinkProps) => {
-  const colorClass = !!white ? 'text-white hover:text-white' : ''
+const HeaderLink = ({ children, href, active }: HeaderLinkProps) => {
   return (
     <Link href={href}>
       <a
-        className={'block py-2 pr-4 pl-3 md:p-0 hover:underline ' + colorClass}
+        className={`block py-2 px-3 md:p-0 text-sm font-medium transition-colors ${
+          active
+            ? 'text-black dark:text-white font-semibold'
+            : 'text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white'
+        }`}
       >
         {children}
       </a>
@@ -30,87 +33,85 @@ type Props = {
 
 const Header = ({ dark }: Props) => {
   const [showMobileNav, setShowMobileNav] = useState(false)
-  const [darkMode, setDarkMode] = useState(false)
-
-  const [currentTheme, setTheme] = useCurrentTheme()
+  const router = useRouter()
 
   const links = [
+    { text: 'Inicio', href: '/' },
     { text: 'Posts', href: '/posts' },
     { text: 'Predicaciones', href: '/predicaciones' },
     { text: 'Contacto', href: '/contacto' },
   ]
 
-  useEffect(() => {
-    const theme = !!dark ? 'dark' : currentTheme
-    setDarkMode(theme === 'dark')
-  }, [currentTheme])
-
-  const colorClass = !!darkMode ? 'bg-black' : 'bg-white/60 backdrop-blur-md'
-
-  const ToggleButton = () => (
-    <button
-      data-collapse-toggle="mobile-menu"
-      type="button"
-      className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-      aria-controls="mobile-menu"
-      aria-expanded="false"
-      onClick={() => setShowMobileNav(!showMobileNav)}
-    >
-      <span className="sr-only">Open main menu</span>
-      <svg
-        className="w-6 h-6"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fillRule="evenodd"
-          d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-          clipRule="evenodd"
-        ></path>
-      </svg>
-      <svg
-        className="hidden w-6 h-6"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fillRule="evenodd"
-          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-          clipRule="evenodd"
-        ></path>
-      </svg>
-    </button>
-  )
+  const isLinkActive = (href: string) => {
+    if (href === '/') return router.pathname === '/'
+    return router.pathname.startsWith(href)
+  }
 
   return (
-    <nav className={'sticky top-0 z-50 ' + colorClass}>
+    <header className="sticky top-0 z-50 border-b border-neutral-200/80 dark:border-neutral-800/80 bg-white/85 dark:bg-neutral-900/85 backdrop-blur-md transition-colors">
       <Container>
-        <div className="container flex flex-wrap justify-between items-center mx-auto pt-6 pb-6">
-          <BrandName white={dark} />
-          <div className='flex flex-row md:hidden'>
+        <div className="flex flex-wrap justify-between items-center py-4">
+          <BrandName />
+
+          <div className="flex items-center gap-2 md:hidden">
             <DarkModeSwitch />
-            <ToggleButton />
+            <button
+              type="button"
+              className="inline-flex items-center justify-center w-9 h-9 text-neutral-600 rounded-lg hover:bg-neutral-100 focus:outline-none dark:text-neutral-300 dark:hover:bg-neutral-800"
+              aria-label="Abrir menú"
+              onClick={() => setShowMobileNav(!showMobileNav)}
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
+                {showMobileNav ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
           </div>
-          <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
-            <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium items-center">
-              <DarkModeSwitch />
+
+          <div className="hidden md:flex md:items-center md:space-x-8">
+            <ul className="flex flex-row space-x-8 items-center">
               {links.map((link) => (
                 <li key={link.href}>
-                  <HeaderLink href={link.href} white={dark}>
+                  <HeaderLink
+                    href={link.href}
+                    active={isLinkActive(link.href)}
+                  >
                     {link.text}
                   </HeaderLink>
                 </li>
               ))}
             </ul>
+            <div className="pl-2 border-l border-neutral-200 dark:border-neutral-800">
+              <DarkModeSwitch />
+            </div>
           </div>
+
           {showMobileNav && (
-            <div className="w-full md:hidden" id="mobile-menu">
-              <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+            <div className="w-full md:hidden pt-4 pb-2 border-t border-neutral-200 dark:border-neutral-800 mt-4">
+              <ul className="flex flex-col space-y-1">
                 {links.map((link) => (
-                  <li>
-                    <HeaderLink href={link.href} white={dark}>
+                  <li key={link.href}>
+                    <HeaderLink
+                      href={link.href}
+                      active={isLinkActive(link.href)}
+                    >
                       {link.text}
                     </HeaderLink>
                   </li>
@@ -120,7 +121,7 @@ const Header = ({ dark }: Props) => {
           )}
         </div>
       </Container>
-    </nav>
+    </header>
   )
 }
 

@@ -120,9 +120,9 @@ export default function Predicaciones({ sermons }: Props) {
           )}
 
           {featuredSermon && (
-            <div className="mb-16 bg-neutral-50 border border-neutral-200 dark:bg-neutral-800 dark:border-neutral-700 p-4 md:p-8">
+            <div className="mb-16 rounded-2xl bg-neutral-50 border border-neutral-200/80 dark:bg-neutral-900 dark:border-neutral-800 p-5 md:p-8 shadow-sm">
               <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-8 items-center">
-                <div className="w-full aspect-video relative bg-black mb-6 lg:mb-0">
+                <div className="w-full aspect-video relative bg-black rounded-xl overflow-hidden mb-6 lg:mb-0">
                   <iframe
                     src={`https://www.youtube.com/embed/${featuredSermon.videoId}?rel=0`}
                     title={featuredSermon.title}
@@ -132,7 +132,7 @@ export default function Predicaciones({ sermons }: Props) {
                   />
                 </div>
                 <div>
-                  <span className="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 mb-3 bg-black text-white dark:bg-white dark:text-black">
+                  <span className="inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 bg-black text-white dark:bg-white dark:text-black">
                     Predicación más reciente
                   </span>
                   <h2 className="text-2xl md:text-3xl font-bold leading-snug mb-3">
@@ -210,13 +210,14 @@ export default function Predicaciones({ sermons }: Props) {
                         href="/predicaciones/[slug]"
                       >
                         <a className="block focus:outline-none">
-                          <div className="w-full aspect-video relative mb-4 overflow-hidden transition-shadow duration-200 group-hover:shadow-lg">
+                          <div className="w-full aspect-video relative mb-4 rounded-xl overflow-hidden border border-neutral-200/70 dark:border-neutral-800 transition-shadow duration-200 group-hover:shadow-md">
                             <NextImage
                               src={sermon.thumbnail}
                               alt={sermon.title}
                               layout="fill"
                               objectFit="cover"
                               quality={90}
+                              className="group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                             />
                             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors flex items-center justify-center">
                               <div className="w-14 h-14 rounded-full bg-black/80 text-white flex items-center justify-center group-hover:scale-110 transition-transform">

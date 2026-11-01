@@ -28,14 +28,13 @@ const Post = ({ post, preview, source }: Props) => {
 
   return (
     <Layout preview={preview}>
-      <div className="pb-8">
-        {post && <PostImageHeader post={post} />}
+      <div className="pb-12">
         <Container>
           {router.isFallback ? (
-            <PostTitle>Loading…</PostTitle>
+            <PostTitle>Cargando…</PostTitle>
           ) : (
             <>
-              <article className="mb-12 pt-12">
+              <article className="mb-12 pt-10">
                 <NextSeo
                   title={`${post.title} | Josman Proudinat`}
                   description={post.excerpt}

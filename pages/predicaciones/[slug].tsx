@@ -107,7 +107,7 @@ export default function PredicacionPage({ sermon, source }: Props) {
                     </div>
                   )}
 
-                  <div className="w-full aspect-video relative bg-black mb-10 shadow-md">
+                  <div className="w-full aspect-video relative bg-black mb-10 rounded-2xl overflow-hidden shadow-md border border-neutral-200/70 dark:border-neutral-800">
                     <iframe
                       src={`https://www.youtube.com/embed/${sermon.videoId}?rel=0`}
                       title={sermon.title}

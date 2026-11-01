@@ -2,24 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 .btn-primary {
-  @apply bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0 dark:text-black dark:bg-neutral-100 dark:border-white dark:hover:bg-transparent dark:hover:text-white
+  @apply inline-flex items-center justify-center rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-900 font-semibold py-3 px-6 duration-200 transition-all shadow-sm hover:shadow dark:text-black dark:bg-white dark:border-white dark:hover:bg-neutral-200;
 }
 
 .btn-primary-outline {
-  @apply bg-transparent border border-black hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black font-bold py-3 px-12 lg:px-8 duration-200 transition-colors
+  @apply inline-flex items-center justify-center rounded-lg bg-transparent border border-neutral-300 text-neutral-900 hover:border-neutral-900 hover:bg-neutral-900 hover:text-white dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-white dark:hover:bg-white dark:hover:text-black font-semibold py-3 px-6 duration-200 transition-all;
 }
 
 input {
-  @apply dark:bg-neutral-600
+  @apply dark:bg-neutral-900 dark:border-neutral-700 dark:text-white;
 }
 
 input::placeholder {
-  @apply dark:text-neutral-400
+  @apply dark:text-neutral-500;
 }
 
 textarea {
-  @apply dark:bg-neutral-600
+  @apply dark:bg-neutral-900 dark:border-neutral-700 dark:text-white;
 }
 
 /* Substack RSS Content Styles */

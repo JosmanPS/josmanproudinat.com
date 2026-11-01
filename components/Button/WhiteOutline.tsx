@@ -3,14 +3,14 @@ import Link from 'next/link'
 
 type Props = {
   href: string
-  children: string
+  children: React.ReactNode
 }
 
 export default function WhiteOutline({ href, children }: Props) {
   return (
     <Link as={href} href={href}>
-      <a className="bg-transparent hover:bg-white hover:text-black border border-white text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0">
-        { children }
+      <a className="inline-flex items-center justify-center rounded-lg bg-transparent hover:bg-white/10 border border-neutral-600 hover:border-white text-white font-semibold py-3 px-6 duration-200 transition-all">
+        {children}
       </a>
     </Link>
   )

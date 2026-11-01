@@ -12,11 +12,13 @@ export default function contacto() {
         <title>Contacto | Josman Proudinat</title>
       </Head>
       <Container>
-        <section className="py-8">
+        <section className="py-12 max-w-2xl mx-auto">
           <PostTitle>Contacto</PostTitle>
-          <div className="max-w-4xl mx-auto mt-24">
-            <ContactForm />
-          </div>
+          <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-10 leading-relaxed">
+            Si deseas ponerte en contacto conmigo para invitaciones, preguntas
+            o comentarios, completa el siguiente formulario.
+          </p>
+          <ContactForm />
         </section>
       </Container>
     </Layout>
