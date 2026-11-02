@@ -21,7 +21,8 @@ function slugifyTitle(str = '') {
 function cleanDisplayTitle(rawTitle = '') {
   return rawTitle
     .replace(/\u00a0/g, ' ')
-    .replace(/\s*-\s*(Pastor|Ps\.?)\s*Josman(\s+Proudinat)?$/i, '')
+    .replace(/\s*[-—|]?\s*(Pastor|Ps\.?)\s*Josman(\s+Proudinat)?\s*$/i, '')
+    .replace(/\s*[-—|]?\s*Josman\s+Proudinat\s*$/i, '')
     .replace(/\s+/g, ' ')
     .trim()
 }
@@ -147,6 +148,23 @@ async function fetchVideoMetadataAndTranscript(videoId) {
   let publishDate = new Date().toISOString().slice(0, 10)
   let shortDescription = ''
   let transcript = ''
+
+  const dateMeta =
+    html.match(/itemprop="datePublished"\s+content="([^"]+)"/) ||
+    html.match(/"publishDate":"([^"]+)"/) ||
+    html.match(/"uploadDate":"([^"]+)"/)
+  if (dateMeta && dateMeta[1]) {
+    publishDate = dateMeta[1].slice(0, 10)
+  }
+
+  const descMatch = html.match(/"shortDescription":"((?:[^"\\]|\\.)*)"/)
+  if (descMatch && descMatch[1]) {
+    try {
+      shortDescription = JSON.parse(`"${descMatch[1]}"`)
+    } catch {
+      shortDescription = descMatch[1]
+    }
+  }
 
   if (prMatch) {
     try {
