@@ -4,9 +4,10 @@
     "node": "26.x"
   },
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
+    "postinstall": "node ./scripts/node-compat.cjs",
+    "dev": "NODE_OPTIONS='--require ./scripts/node-compat.cjs' next",
+    "build": "NODE_OPTIONS='--require ./scripts/node-compat.cjs' next build",
+    "start": "NODE_OPTIONS='--require ./scripts/node-compat.cjs' next start",
     "typecheck": "tsc",
     "sync:predicaciones": "node scripts/sync-predicaciones.mjs"
   },
