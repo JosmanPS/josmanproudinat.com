@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { HOME_OG_IMAGE_URL } from '../lib/constants'
+import { SUBSTACK_FEED_URL } from '../lib/constants'
 
 const Meta = () => {
   return (
@@ -30,11 +30,12 @@ const Meta = () => {
       <link rel="shortcut icon" href="/favicon/favicon.ico" />
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-      <meta name="theme-color" content="#000" />
-      <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      <meta
-        name="description"
-        content='Predicaciones y enseñanzas bíblicas cristianas compartidas por Josman Proudinat.'
+      <meta name="theme-color" content="#000000" />
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title="Josman Proudinat RSS Feed"
+        href={SUBSTACK_FEED_URL}
       />
     </Head>
   )

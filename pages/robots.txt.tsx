@@ -9,18 +9,22 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     res.end()
 
     return {
-      props: {}
+      props: {},
     }
   }
 
   // cache for up to one day
   res.setHeader('Cache-Control', 'public, max-age=86400, immutable')
-  res.setHeader('Content-Type', 'text/plain')
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8')
 
-  // only allow the site to be crawlable on the production deployment
-  if (process.env.VERCEL_ENV === 'production') {
+  const isProd =
+    process.env.VERCEL_ENV === 'production' ||
+    (!process.env.VERCEL_ENV && process.env.NODE_ENV === 'production')
+
+  if (isProd) {
     res.write(`User-agent: *
 Allow: /
+Disallow: /posts/open-graph/
 Sitemap: ${host}/sitemap.xml
 `)
   } else {
@@ -33,7 +37,7 @@ Sitemap: ${host}/sitemap.xml
   res.end()
 
   return {
-    props: {}
+    props: {},
   }
 }
 

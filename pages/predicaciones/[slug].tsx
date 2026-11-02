@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
@@ -13,11 +14,25 @@ import DateFormatter from '../../components/date-formatter'
 import ReadingTime from '../../components/Posts/ReadingTime'
 import SubstackCustomForm from '../../components/SubstackCustomForm'
 import Sermon from '../../types/sermon'
+import { host } from '../../lib/config'
 import { getAllSermons, getSermonBySlug } from '../../lib/youtube'
 
 type Props = {
   sermon: Sermon
   source: MDXRemoteSerializeResult
+}
+
+function toIsoDuration(durationStr = ''): string | undefined {
+  if (!durationStr) return undefined
+  const parts = durationStr.split(':').map((p) => parseInt(p.trim(), 10))
+  if (parts.some((n) => isNaN(n))) return undefined
+  if (parts.length === 3) {
+    return `PT${parts[0]}H${parts[1]}M${parts[2]}S`
+  }
+  if (parts.length === 2) {
+    return `PT${parts[0]}M${parts[1]}S`
+  }
+  return undefined
 }
 
 export default function PredicacionPage({ sermon, source }: Props) {
@@ -26,6 +41,68 @@ export default function PredicacionPage({ sermon, source }: Props) {
   if (!router.isFallback && !sermon?.slug) {
     return <ErrorPage statusCode={404} />
   }
+
+  const sermonUrl = sermon?.slug
+    ? `${host}/predicaciones/${sermon.slug}`
+    : `${host}/predicaciones`
+  const isoDuration = toIsoDuration(sermon?.duration)
+  const tagList = sermon?.tags
+    ? sermon.tags
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean)
+    : []
+
+  const sermonJsonLd = sermon?.slug
+    ? {
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'VideoObject',
+            name: sermon.title,
+            description: sermon.excerpt,
+            thumbnailUrl: [
+              sermon.thumbnail,
+              `https://i.ytimg.com/vi/${sermon.videoId}/maxresdefault.jpg`,
+            ],
+            uploadDate: sermon.date ? `${sermon.date}T00:00:00Z` : undefined,
+            duration: isoDuration,
+            embedUrl: `https://www.youtube.com/embed/${sermon.videoId}`,
+            contentUrl: `https://www.youtube.com/watch?v=${sermon.videoId}`,
+            inLanguage: 'es',
+            author: {
+              '@type': 'Person',
+              name: 'Josman Proudinat',
+              url: host,
+            },
+          },
+          {
+            '@type': 'Article',
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': sermonUrl,
+            },
+            headline: sermon.title,
+            description: sermon.excerpt,
+            image: [sermon.thumbnail],
+            datePublished: sermon.date,
+            dateModified: sermon.date,
+            inLanguage: 'es',
+            keywords: tagList.join(', '),
+            author: {
+              '@type': 'Person',
+              name: 'Josman Proudinat',
+              url: host,
+            },
+            publisher: {
+              '@type': 'Person',
+              name: 'Josman Proudinat',
+              url: host,
+            },
+          },
+        ],
+      }
+    : null
 
   return (
     <Layout>
@@ -39,16 +116,35 @@ export default function PredicacionPage({ sermon, source }: Props) {
                 <NextSeo
                   title={`${sermon.title} | Predicaciones | Josman Proudinat`}
                   description={sermon.excerpt}
+                  canonical={sermonUrl}
                   openGraph={{
                     type: 'article',
-                    locale: 'es',
+                    url: sermonUrl,
+                    title: `${sermon.title} | Josman Proudinat`,
+                    description: sermon.excerpt,
+                    locale: 'es_ES',
                     site_name: 'Josman Proudinat',
-                    images: [{ url: sermon.thumbnail }],
+                    article: {
+                      publishedTime: sermon.date,
+                      authors: ['Josman Proudinat'],
+                      tags: tagList.length > 0 ? tagList : undefined,
+                    },
+                    images: [{ url: sermon.thumbnail, alt: sermon.title }],
                   }}
                   twitter={{
                     cardType: 'summary_large_image',
                   }}
                 />
+                {sermonJsonLd && (
+                  <Head>
+                    <script
+                      type="application/ld+json"
+                      dangerouslySetInnerHTML={{
+                        __html: JSON.stringify(sermonJsonLd),
+                      }}
+                    />
+                  </Head>
+                )}
 
                 <div className="max-w-4xl mx-auto">
                   <div className="mb-6">
@@ -86,24 +182,18 @@ export default function PredicacionPage({ sermon, source }: Props) {
                     </a>
                   </div>
 
-                  {sermon.tags && (
+                  {tagList.length > 0 && (
                     <div className="mb-6 flex flex-wrap gap-2">
-                      {sermon.tags
-                        .split(',')
-                        .map((t) => t.trim())
-                        .filter(Boolean)
-                        .map((tag) => (
-                          <Link
-                            key={tag}
-                            href={`/predicaciones?tag=${encodeURIComponent(
-                              tag
-                            )}`}
-                          >
-                            <a className="text-xs font-medium px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 hover:bg-black hover:text-white dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-white dark:hover:text-black transition-colors">
-                              #{tag}
-                            </a>
-                          </Link>
-                        ))}
+                      {tagList.map((tag) => (
+                        <Link
+                          key={tag}
+                          href={`/predicaciones?tag=${encodeURIComponent(tag)}`}
+                        >
+                          <a className="text-xs font-medium px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 hover:bg-black hover:text-white dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-white dark:hover:text-black transition-colors">
+                            #{tag}
+                          </a>
+                        </Link>
+                      ))}
                     </div>
                   )}
 

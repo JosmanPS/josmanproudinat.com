@@ -1,8 +1,9 @@
 import React from 'react'
-import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 import Container from '../../components/container'
 import Layout from '../../components/layout'
 import { getAllPosts } from '../../lib/api'
+import { host } from '../../lib/config'
 import PostTitle from '../../components/post-title'
 import PostType from '../../types/post'
 import MoreStories from '../../components/more-stories'
@@ -15,12 +16,24 @@ type Props = {
 export default function Posts({ posts }: Props) {
   const heroPost = posts[0]
   const morePosts = posts.slice(1)
+  const pageUrl = `${host}/posts`
+  const pageTitle = 'Artículos y Enseñanzas | Josman Proudinat'
+  const pageDescription =
+    'Artículos, ensayos y reflexiones sobre teología pentecostal, estudios bíblicos, liderazgo saludable y la misión de la iglesia por Josman Proudinat.'
 
   return (
     <Layout>
-      <Head>
-        <title>Posts | Josman Proudinat</title>
-      </Head>
+      <NextSeo
+        title={pageTitle}
+        description={pageDescription}
+        canonical={pageUrl}
+        openGraph={{
+          type: 'website',
+          url: pageUrl,
+          title: pageTitle,
+          description: pageDescription,
+        }}
+      />
       <Container>
         <section className="pt-10 pb-8">
           <PostTitle>Artículos y Enseñanzas</PostTitle>

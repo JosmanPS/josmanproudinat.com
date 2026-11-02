@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
-import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import NextImage from 'next/image'
+import { NextSeo } from 'next-seo'
 import Container from '../../components/container'
 import Layout from '../../components/layout'
 import PostTitle from '../../components/post-title'
@@ -10,6 +10,7 @@ import DateFormatter from '../../components/date-formatter'
 import ButtonPrimary from '../../components/ButtonPrimary'
 import Sermon from '../../types/sermon'
 import { getAllSermons } from '../../lib/youtube'
+import { host } from '../../lib/config'
 import { YOUTUBE_PLAYLIST_URL } from '../../lib/constants'
 
 type Props = {
@@ -51,16 +52,29 @@ export default function Predicaciones({ sermons }: Props) {
 
   const featuredSermon = !activeTag ? sermons[0] || null : null
   const gridSermons = !activeTag ? sermons.slice(1) : filteredSermons
+  const pageUrl = `${host}/predicaciones`
+  const pageTitle = activeTag
+    ? `Predicaciones sobre ${activeTag} | Josman Proudinat`
+    : 'Predicaciones y Estudios Bíblicos | Josman Proudinat'
+  const pageDescription =
+    'Predicaciones cristianas en video, estudios bíblicos y notas de enseñanza del pastor Josman Proudinat en Iglesia Rompiendo Fronteras.'
 
   return (
     <Layout>
-      <Head>
-        <title>Predicaciones | Josman Proudinat</title>
-        <meta
-          name="description"
-          content="Predicaciones, enseñanzas en video y notas de estudio de Josman Proudinat."
-        />
-      </Head>
+      <NextSeo
+        title={pageTitle}
+        description={pageDescription}
+        canonical={pageUrl}
+        openGraph={{
+          type: 'website',
+          url: pageUrl,
+          title: pageTitle,
+          description: pageDescription,
+          images: sermons[0]?.thumbnail
+            ? [{ url: sermons[0].thumbnail, alt: sermons[0].title }]
+            : undefined,
+        }}
+      />
       <Container>
         <section className="py-8">
           <PostTitle>Predicaciones</PostTitle>
