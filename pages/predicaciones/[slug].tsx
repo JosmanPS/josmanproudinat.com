@@ -13,13 +13,19 @@ import PostBody from '../../components/post-body'
 import DateFormatter from '../../components/date-formatter'
 import ReadingTime from '../../components/Posts/ReadingTime'
 import SubstackCustomForm from '../../components/SubstackCustomForm'
+import RelatedSermons from '../../components/related-sermons'
 import Sermon from '../../types/sermon'
 import { host } from '../../lib/config'
-import { getAllSermons, getSermonBySlug } from '../../lib/youtube'
+import {
+  getAllSermons,
+  getSermonBySlug,
+  getRelatedSermons,
+} from '../../lib/youtube'
 
 type Props = {
   sermon: Sermon
   source: MDXRemoteSerializeResult
+  relatedSermons: Sermon[]
 }
 
 function toIsoDuration(durationStr = ''): string | undefined {
@@ -35,7 +41,11 @@ function toIsoDuration(durationStr = ''): string | undefined {
   return undefined
 }
 
-export default function PredicacionPage({ sermon, source }: Props) {
+export default function PredicacionPage({
+  sermon,
+  source,
+  relatedSermons,
+}: Props) {
   const router = useRouter()
 
   if (!router.isFallback && !sermon?.slug) {
@@ -210,10 +220,12 @@ export default function PredicacionPage({ sermon, source }: Props) {
 
                 <PostBody content={sermon.content} source={source} />
               </article>
+
+              <RelatedSermons sermons={relatedSermons} />
             </>
           )}
 
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto pt-10">
             <SubstackCustomForm />
           </div>
         </Container>
@@ -237,12 +249,16 @@ export async function getStaticProps({ params }: Params) {
     }
   }
 
-  const source = await serialize(sermon.content)
+  const [source, relatedSermons] = await Promise.all([
+    serialize(sermon.content),
+    getRelatedSermons(sermon.slug, 3),
+  ])
 
   return {
     props: {
       sermon,
       source,
+      relatedSermons,
     },
   }
 }

@@ -85,6 +85,48 @@ export function getAllSermons(fields: string[] = []): Sermon[] {
   })
 }
 
+export function getRelatedSermons(currentSlug: string, count: number = 3): Sermon[] {
+  const allSermons = getAllSermons([
+    'slug',
+    'title',
+    'date',
+    'thumbnail',
+    'excerpt',
+    'tags',
+    'duration',
+    'channel',
+  ])
+  const current = allSermons.find((s) => s.slug === currentSlug)
+  const others = allSermons.filter((s) => s.slug !== currentSlug)
+
+  if (!current || !current.tags) {
+    return others.slice(0, count)
+  }
+
+  const currentTags = current.tags
+    .split(',')
+    .map((t) => t.trim().toLowerCase())
+    .filter(Boolean)
+
+  const scored = others.map((s) => {
+    const sTags = (s.tags || '')
+      .split(',')
+      .map((t) => t.trim().toLowerCase())
+      .filter(Boolean)
+    const matchCount = sTags.filter((t) => currentTags.includes(t)).length
+    return { sermon: s, score: matchCount }
+  })
+
+  scored.sort((a, b) => {
+    if (b.score !== a.score) {
+      return b.score - a.score
+    }
+    return b.sermon.date > a.sermon.date ? 1 : -1
+  })
+
+  return scored.slice(0, count).map((item) => item.sermon)
+}
+
 export async function getPlaylistSermons(): Promise<Sermon[]> {
   return getAllSermons()
 }
